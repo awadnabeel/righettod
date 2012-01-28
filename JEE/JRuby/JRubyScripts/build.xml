@@ -1,0 +1,42 @@
+<!--
+ 	Ant script to run JRuby scripts
+  -->
+<project basedir="." default="run.jruby.script">
+
+	<!-- JRuby properties -->
+	<property name="jruby.home" value="D:/IT_RESEARCH/JEE_HOME/JRuby-1.1.1" />
+	<property name="jruby.lib" value="${jruby.home}/lib" />
+	<property name="jruby.shell" value="cmd.exe" />
+	<property name="jruby.script" value="jruby.bat" />
+	<property name="jruby.options" value="-b" />
+
+	<!-- JRuby classpath -->
+	<path id="jruby.classpath">
+		<fileset dir="${jruby.lib}" includes="**/*.jar" />
+	</path>
+
+	<!-- Define AntForm task --> 
+	<taskdef name="antform" classname="com.sardak.antform.AntForm">
+		<classpath>
+			<fileset dir="../AntExternalLib" includes="*.jar" />
+		</classpath>
+	</taskdef>
+
+	<!-- Target to run the script passed in parameter -->
+	<target name="run.jruby.script">
+		<echo message="Script selection" />
+		<antform title="Script selection">
+			<textProperty label="Insert name of a script in 'JRubyScripts' to execute :" property="script" />
+		</antform>
+		<echo message="Execute script '${script}'" />
+		<java classname="org.jruby.Main" classpathref="jruby.classpath" fork="true">
+			<jvmarg value="-Djruby.home='${jruby.home}'" />
+			<jvmarg value="-Djruby.lib='${jruby.lib}'" />
+			<jvmarg value="-Djruby.shell='${jruby.shell}'" />
+			<jvmarg value="-Djruby.script='${jruby.script}'" />
+			<arg value="${jruby.options}" />
+			<arg value="${script}" />
+		</java>
+	</target>
+
+</project>

@@ -1,0 +1,18 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:traduction="http://www.hikage.be/schema/traduction"
+           targetNamespace="http://www.hikage.be/schema/traduction" elementFormDefault="qualified">
+    <xs:element name="TraductionRequest" type="traduction:TraductionRequestType"/>
+    <xs:element name="TraductionResponse" type="traduction:TraductionResponseType"/>
+    <xs:complexType name="TraductionRequestType">
+        <xs:sequence>
+            <xs:element name="langueOrigine" type="xs:string"/>
+            <xs:element name="langueDestination" type="xs:string"/>
+            <xs:element name="texte" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TraductionResponseType">
+        <xs:sequence>
+            <xs:element name="auteur" type="xs:string"/>
+            <xs:element name="texte" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

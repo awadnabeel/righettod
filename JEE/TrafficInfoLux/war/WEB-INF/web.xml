@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+ <servlet>
+  <servlet-name>MobileInfo</servlet-name>
+  <servlet-class>com.cychop.til.gapp.MobileDeviceServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <description>This servlet implements a instant messaging BOT providong informations about a trip using the XMPP protocol.</description>
+  <servlet-name>XMPPBotInfosProviderServlet</servlet-name>
+  <servlet-class>com.cychop.til.gapp.XMPPBotInfosProviderServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>MobileInfo</servlet-name>
+  <url-pattern>/mobiledevice</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>XMPPBotInfosProviderServlet</servlet-name>
+  <url-pattern>/_ah/xmpp/message/chat/</url-pattern>
+ </servlet-mapping>
+ <welcome-file-list>
+  <welcome-file>index.jsp</welcome-file>
+ </welcome-file-list>
+ <login-config>
+  <auth-method>BASIC</auth-method>
+ </login-config>
+</web-app>

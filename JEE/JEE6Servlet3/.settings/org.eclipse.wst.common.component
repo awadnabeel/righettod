@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="JEE6Servlet3">
+        <wb-resource deploy-path="/" source-path="/WebContent"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/DynamicDeclaredCode"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/StaticDeclaredCode"/>
+        <dependent-module archiveName="JEE6Servlet3-WebFragment01.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/JEE6Servlet3-WebFragment01/JEE6Servlet3-WebFragment01">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="JEE6Servlet3-WebFragment02.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/JEE6Servlet3-WebFragment02/JEE6Servlet3-WebFragment02">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="JEE6Servlet3-WebFragment03.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/JEE6Servlet3-WebFragment03/JEE6Servlet3-WebFragment03">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="JEE6Servlet3"/>
+        <property name="java-output-path" value="/JEE6Servlet3/WebContent/WEB-INF/classes"/>
+    </wb-module>
+</project-modules>

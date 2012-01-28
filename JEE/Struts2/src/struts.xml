@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!--
+		Set Struts2 constants configuration value, this parameters can be
+		setted in a file named "struts.properties" located as the same place
+		that the "struts.xml" file
+	-->
+	<!-- Debug mode -->
+	<constant name="struts.devMode" value="false" />
+	
+	<!--
+		Global resource bunlde for messages internationalization, 
+		see http://struts.apache.org/2.x/docs/localization.html
+		
+		More bundles can be setted, they must separated by a coma
+		see http://struts.apache.org/2.0.14/docs/how-do-i-set-a-global-resource-bundle.html 
+	-->
+	<constant name="struts.custom.i18n.resources" value="global-messages" />
+
+	<!-- Define a package that will store actions configurations
+		See http://struts.apache.org/2.x/docs/package-configuration.html
+	 -->
+	<package name="defaultPackage" extends="struts-default">
+		<!-- 
+			Define interceptor(s)
+			See http://struts.apache.org/2.x/docs/interceptors.html
+		 -->
+	   <interceptors>
+	       <interceptor name="customLogger" class="com.drighetto.struts2.view.LogInterceptor"/>
+	       <!-- Define a stack for the interceptors execution order -->
+        	<interceptor-stack name="myPackageStack">
+        	<!-- The 2 interceptors belows are inherited from the package "struts-default" -->
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="token"/>
+           <!-- Put the custom logger at the end of the chain -->
+           <interceptor-ref name="customLogger"/>
+        </interceptor-stack>	       
+	   </interceptors>
+	   
+	   <!-- Define a default interceptors chains (through a stack) applied to all actions of the package -->
+	   <default-interceptor-ref name="myPackageStack" />	
+	   	
+		<!-- Define a action -->
+		<action name="action01a" class="com.drighetto.struts2.model.Action01">
+			<!-- Define a renderer for the SUCCESS flag -->
+			<result name="success" type="dispatcher">/page01.jsp</result>
+			<!-- Define a renderer in case of validation error -->
+			<result name="input" type="dispatcher">/page01.jsp</result>
+		</action>
+		
+		<!-- Define a action -->
+		<action name="action01b" method="executeNoValidation" class="com.drighetto.struts2.model.Action01">
+			<!-- Define a renderer for the SUCCESS flag -->
+			<result name="success" type="dispatcher">/page01.jsp</result>
+		</action>	
+			
+		<!-- Define a action -->
+		<action name="action02" class="com.drighetto.struts2.model.Action02">
+			<!-- Define a renderer for the SUCCESS flag -->
+			<result name="success" type="dispatcher">/page02.jsp</result>
+			<!-- Define a renderer in case of validation error -->
+			<result name="input" type="dispatcher">/page02.jsp</result>
+		</action>
+		
+		<!-- Define a action -->
+		<action name="action03" class="com.drighetto.struts2.model.Action03">
+			<!-- Define a renderer for the SUCCESS flag -->
+			<result name="success" type="dispatcher">/page03.jsp</result>
+			<!-- Define a renderer for the ERROR flag -->
+			<result name="error" type="dispatcher">/page03.jsp</result>
+		</action>
+		
+		<!-- Define a action -->
+		<action name="action04" class="com.drighetto.struts2.model.Action04">
+			<!-- Define a renderer for the SUCCESS flag -->
+			<result name="success" type="dispatcher">/page04.jsp</result>
+		</action>
+
+		<!-- Define a action -->
+		<action name="action05" class="com.drighetto.struts2.model.Action05">
+			<!-- Define a renderer for the SUCCESS flag -->
+			<result name="success" type="dispatcher">/page05.jsp</result>
+			<!-- Define a renderer for the INVALID.TOKEN flag -->
+			<result name="invalid.token" type="dispatcher">/page05.jsp</result>
+		</action>
+				
+	</package>
+</struts>    

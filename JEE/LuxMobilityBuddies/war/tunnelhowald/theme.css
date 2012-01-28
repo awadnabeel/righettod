@@ -1,0 +1,43 @@
+/*Styles for background according to ride status*/
+.fluid{
+	color: #759E60;	
+	font-size: 25px;
+	text-align: left;
+}
+.loaded{
+	color: #E00606;
+	font-size: 25px;
+	text-align: left;
+}
+.warn{
+	color: #FF753A;
+	font-size: 25px;
+	text-align: left;
+}
+/* Styles for Sencha components */
+.card > .x-panel-body {
+	padding: 20px;
+	text-align: center;
+	color: white;
+}
+.x-tabpanel > .x-panel-body .x-panel-body {
+    text-align: center;
+    font-weight: bold;
+    text-shadow: rgba(255,255,255,.2) 0 1px 0;
+}
+body {
+    background-color: #333;
+}
+.x-phone .x-tabpanel > .x-panel-body .x-panel-body {
+    padding: 30px 20px;
+}
+.x-phone p {
+    line-height: 18px;
+}
+h1 {
+    font-weight: bold;
+    font-size: 25px;
+}
+p {
+    line-height: 30px;
+}

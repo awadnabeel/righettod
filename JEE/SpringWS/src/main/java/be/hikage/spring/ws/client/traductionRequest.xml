@@ -1,0 +1,5 @@
+<traduction:TraductionRequest  xmlns:traduction="http://www.hikage.be/schema/traduction">
+    <traduction:langueOrigine>en</traduction:langueOrigine>
+    <traduction:langueDestination>fr</traduction:langueDestination>
+    <traduction:texte>Hello World !</traduction:texte>
+ </traduction:TraductionRequest>

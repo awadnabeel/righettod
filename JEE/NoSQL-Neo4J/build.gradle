@@ -1,0 +1,45 @@
+/* ********************** */
+/* Gradle Build Script    */     
+/* ********************** */
+//Use Java plugins in order to have base tasks for Java project type
+apply plugin: 'java'
+//Configure some compilations and others build properties
+sourceCompatibility = 1.5
+version = '1.0'
+archivesBaseName = 'MyArtefacts.jar'
+//Define artefact MANIFEST properties
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Neo4J Sample', 'Implementation-Version': version
+    }
+}
+//Define JavaDoc generation properties
+javadoc {
+	title = 'MyProject'
+	destinationDir = new File(project.buildDir, 'javadoc')
+}
+//Define elements location
+sourceSets {
+	//Main sources and files
+	main {
+		java {
+			srcDir 'src'
+		}
+		resources {
+			srcDir 'src'
+		}
+	}
+	//Test sources and files
+	test {
+		java {
+			srcDir 'test'
+		}
+		resources {
+			srcDir 'test'
+		}
+	}
+}
+//Define dependencies (in our cases all third party libraries are stored on a local directory)
+dependencies {
+    compile fileTree(dir: 'lib', include: '*.jar')
+}

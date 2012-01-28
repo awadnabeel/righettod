@@ -1,0 +1,14 @@
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\bin\Debug\DotTail.exe.config
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\bin\Debug\DotTail.exe.manifest
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\bin\Debug\DotTail.application
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\bin\Debug\DotTail.exe
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\bin\Debug\DotTail.pdb
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Debug\ResolveAssemblyReference.cache
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Debug\DotTail.Form1.resources
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Debug\DotTail.Properties.Resources.resources
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Debug\DotTail.csproj.GenerateResource.Cache
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Debug\DotTail.exe.manifest
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Debug\DotTail.application
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Debug\DotTail.exe
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Debug\DotTail.pdb
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\bin\Debug\DotTail.XML

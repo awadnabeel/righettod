@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<traduction:TraductionResponse xmlns:traduction="http://www.hikage.be/schema/traduction">
+    <traduction:langueOrigine>bla</traduction:langueOrigine>
+    <traduction:langueCible>fdjkl</traduction:langueCible>
+    <traduction:texte>bjhk</traduction:texte>
+</traduction:TraductionResponse>

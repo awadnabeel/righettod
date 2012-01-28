@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>file</realm-name>
+    </login-config>
+    <security-role>
+        <description>Sample Role 1</description>
+        <role-name>R1</role-name>
+    </security-role>
+    <security-role>
+        <description>Sample Role 2</description>
+        <role-name>R2</role-name>
+    </security-role>
+    <!-- We define others security constraints for "Servlet05" -->
+    <!-- The security configuration for a specified URL PATTERN defined with annotation is overrided by the configuration into the DD !!! -->
+    <!-- Apply security constraint defining that method POST require "R1" role with transport unsecured. -->
+    <security-constraint>
+        <display-name>Servlet05DDSecurityConstraint01</display-name>
+        <web-resource-collection>            
+            <web-resource-name>ResourcesGroup01</web-resource-name>
+            <url-pattern>/Servlet05</url-pattern>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>R1</role-name>    
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>            
+    </security-constraint>    
+    <!-- Apply security constraint defining that method PUT require "R2" role with transport unsecured. -->
+    <security-constraint>
+        <display-name>Servlet05DDSecurityConstraint02</display-name>
+        <web-resource-collection>            
+            <web-resource-name>ResourcesGroup01</web-resource-name>
+            <url-pattern>/Servlet05</url-pattern>
+            <http-method>PUT</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>R2</role-name>    
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>            
+    </security-constraint>  
+    <!-- Apply security constraint defining that method DELETE require "R1" or "R2" roles with transport unsecured. -->
+    <security-constraint>
+        <display-name>Servlet05DDSecurityConstraint03</display-name>
+        <web-resource-collection>            
+            <web-resource-name>ResourcesGroup01</web-resource-name>
+            <url-pattern>/Servlet05</url-pattern>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>R1</role-name>    
+            <role-name>R2</role-name>    
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>            
+    </security-constraint>    
+    <!-- Apply security constraint defining that method POST require "R2" role with transport secured. -->
+    <security-constraint>
+        <display-name>Servlet05DDSecurityConstraint04</display-name>
+        <web-resource-collection>            
+            <web-resource-name>ResourcesGroup01</web-resource-name>
+            <url-pattern>/Servlet05</url-pattern>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>R2</role-name>    
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>            
+    </security-constraint>    
+    <!-- Apply security constraint defining that method GET is denied for all, transport is unsecured. -->
+    <security-constraint>
+        <display-name>Servlet05DDSecurityConstraint05</display-name>
+        <web-resource-collection>            
+            <web-resource-name>ResourcesGroup01</web-resource-name>
+            <url-pattern>/Servlet05</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <auth-constraint />
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>            
+    </security-constraint>     
+</web-app>

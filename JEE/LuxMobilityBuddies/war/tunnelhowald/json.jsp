@@ -1,0 +1,5 @@
+<%/* This page format the ride informations as SenchaTouch JSONP structure, this is why the content type is "text/javascript" and not "application/json" and the JSON stream in contained in "Ext.util.JSONP.callback()" */ %>
+<%@ page language="java" contentType="text/javascript; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+Ext.util.JSONP.callback({"ShortName": "${THRIDE.shortName}", "DisplayName": "${THRIDE.displayName}", "Current": "<fmt:formatNumber value="${THRIDE.current}" minIntegerDigits="2"/> minutes (now)", "Average": "<fmt:formatNumber value="${THRIDE.average}" minIntegerDigits="2"/> minutes (avg)", "Maximum": "<fmt:formatNumber value="${THRIDE.maximum}" minIntegerDigits="2"/> minutes (max)", <c:choose><c:when test="${THRIDE.current ge THRIDE.maximum}">"Status": "loaded"}</c:when><c:when test="${THRIDE.current ge THRIDE.average}">"Status": "warn"}</c:when><c:when test="${THRIDE.current lt THRIDE.average}">"Status": "fluid"}</c:when></c:choose>)

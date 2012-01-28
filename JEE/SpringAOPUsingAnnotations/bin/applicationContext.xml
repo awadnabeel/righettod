@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ***************************************** 
+  * SPRING APPLICATION CONTEXT DEFINITION *
+  *****************************************
+   - Schema for AOP is included : 
+     http://static.springframework.org/spring/docs/2.0.x/reference/xsd-config.html#xsd-config-body-schemas-aop
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+ 
+ <!-- 
+     =====================
+     * AOP CONFIGURATION *
+     =====================
+  -->
+ <!-- Enable support for configuring Spring AOP based on @AspectJ aspects  -->          
+ <aop:aspectj-autoproxy/> 
+ 
+ <!-- Define aspect beans -->
+ <bean id="myAspect" class="com.drighetto.essai.springaop.aspect.MyAspect" />           
+ 
+ 
+ <!-- 
+     =====================
+     * BEAN CONFIGURATION *
+     =====================
+  -->
+  <!-- Define others non AOP beans -->
+  <bean id="simpleBean" class="com.drighetto.essai.springaop.bean.SimpleBean" />
+  
+</beans>           

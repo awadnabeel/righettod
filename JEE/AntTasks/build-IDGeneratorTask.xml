@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Script to test tasks and generate the task deployment artefact -->
+<project name="IDGeneratorTask" default="task.package">
+
+	<!-- Build properties -->
+	<property name="src" value="src" />
+	<property name="task.name" value="IDGeneratorTask" />
+	<property name="dist" value="dist_${task.name}" />
+	<tstamp />
+	
+	<!-- Import commons targets script -->
+	<import file="commons-targets.xml" optional="false"/>
+	
+	<!-- Task to test the task -->
+	<target name="task.test" depends="task.package">	
+		<!-- Define task -->
+		<taskdef name="idgenerator" classname="com.drighetto.anttasks.IDGeneratorTasks">
+			<classpath>
+				<fileset dir="${dist}">
+					<include name="${task.name}.jar" />
+				</fileset>
+			</classpath>
+		</taskdef>
+		<!-- Make a test by updating a property value -->
+		<echo>============ TEST 1 ============</echo>
+		<property name="testProperty01" value="ValueBefore"/>
+		<echo>CONTENT BEFORE   : ${testProperty01}</echo>
+		<idgenerator propertyname="testProperty01"/>
+		<echo>CONTENT AFTER    : ${testProperty01}</echo>
+		<!-- Make a test by setting a property value -->
+		<echo>============ TEST 2 ============</echo>
+		<echo>CONTENT BEFORE   : ${testProperty02}</echo>
+		<idgenerator propertyname="testProperty02"/>
+		<echo>CONTENT AFTER    : ${testProperty02}</echo>
+		<!-- Make a test by setting and updating a property value -->
+		<echo>============ TEST 3 ============</echo>
+		<echo>CONTENT BEFORE   : ${testProperty03}</echo>
+		<idgenerator propertyname="testProperty03"/>
+		<echo>CONTENT AFTER 1  : ${testProperty03}</echo>		
+		<idgenerator propertyname="testProperty03"/>
+		<echo>CONTENT AFTER 2  : ${testProperty03}</echo>	
+	</target>
+
+
+
+</project>
+

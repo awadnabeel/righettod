@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>AjaxTags</display-name>
+	<servlet>
+		<description>Servlet providing sample data</description>
+		<display-name>SampleGenerator</display-name>
+		<servlet-name>SampleGenerator</servlet-name>
+		<servlet-class>com.drighetto.essai.SampleGenerator</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		Provide current time</description>
+		<display-name>
+		TimeGenerator</display-name>
+		<servlet-name>TimeGenerator</servlet-name>
+		<servlet-class>
+		com.drighetto.essai.TimeGenerator</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SampleGenerator</servlet-name>
+		<url-pattern>/SampleGenerator</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TimeGenerator</servlet-name>
+		<url-pattern>/TimeGenerator</url-pattern>
+	</servlet-mapping>
+    <session-config>
+      <session-timeout>1</session-timeout> 
+    </session-config>	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

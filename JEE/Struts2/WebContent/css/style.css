@@ -1,0 +1,19 @@
+/* Style for error message */
+.errorMessage {
+	background: #FBE3E4;
+	color: #D12F19;
+	border-color: #FBC2C4;
+}
+/* Style for action message */
+.actionMessage {
+	background: #E6EFC2;
+	color: #529214;
+	border-color: #C6D880;
+}
+/*title style*/
+h1{
+	color:navy;
+}
+h4{
+	color:maroon;
+}

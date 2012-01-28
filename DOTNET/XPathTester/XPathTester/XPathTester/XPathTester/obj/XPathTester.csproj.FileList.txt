@@ -1,0 +1,16 @@
+bin\Debug\XPathTester.exe
+bin\Debug\XPathTester.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\XPathTester.Form1.resources
+obj\Debug\XPathTester.Properties.Resources.resources
+obj\Debug\XPathTester.csproj.GenerateResource.Cache
+obj\Debug\XPathTester.exe
+obj\Debug\XPathTester.pdb
+bin\Release\XPathTester.exe
+bin\Release\XPathTester.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\XPathTester.Form1.resources
+obj\Release\XPathTester.Properties.Resources.resources
+obj\Release\XPathTester.csproj.GenerateResource.Cache
+obj\Release\XPathTester.exe
+obj\Release\XPathTester.pdb

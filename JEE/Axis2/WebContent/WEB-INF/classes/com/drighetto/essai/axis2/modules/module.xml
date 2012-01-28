@@ -1,0 +1,10 @@
+<module name="audit" class="com.drighetto.essai.axis2.modules.AuditModule">
+   <Inflow>
+        <handler name="InFlowAuditHandler" class="com.drighetto.essai.axis2.modules.AuditHandler">
+        	<order phase="auditPhase" />
+        </handler>
+   </Inflow>
+   <OutFlow/>
+   <OutFaultFlow/>
+   <InFaultFlow/>
+</module>

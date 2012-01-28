@@ -1,0 +1,5 @@
+﻿<!--File storing user settings-->
+<settings>
+  <delay>1000</delay>
+  <wordwrap>False</wordwrap>
+</settings>

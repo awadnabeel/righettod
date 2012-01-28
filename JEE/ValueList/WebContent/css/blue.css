@@ -1,0 +1,51 @@
+A       {color: #222222; font-weight: plain; text-decoration: none; }
+A:hover {color: #222222; font-weight: plain; text-decoration: underline; }
+
+.TnButton {background: #DAE1F9; border-bottom: 1px solid #104A7B; border-right: 1px solid #104A7B; border-left: 1px solid #AFC4D5; border-top:1px solid #AFC4D5; color:#000066; height:16px; text-decoration:none; cursor: hand;}
+.SmButton {background: #DAE1F9; border-bottom: 1px solid #104A7B; border-right: 1px solid #104A7B; border-left: 1px solid #AFC4D5; border-top:1px solid #AFC4D5; color:#000066; height:19px; text-decoration:none; cursor: hand;}
+.MdButton {background: #DAE1F9; border-bottom: 1px solid #104A7B; border-right: 1px solid #104A7B; border-left: 1px solid #AFC4D5; border-top:1px solid #AFC4D5; color:#000066; height:24px; text-decoration:none; cursor: hand;}
+.LgButton {background: #DAE1F9; border-bottom: 1px solid #104A7B; border-right: 1px solid #104A7B; border-left: 1px solid #AFC4D5; border-top:1px solid #AFC4D5; color:#000066; height:24px; text-decoration:none; cursor: hand;}
+
+.rowstyle0   {}
+.rowstyle1   {background: #EFF0FA;}
+.rowstyle2   {}
+.rowstyle3   {background: #EFF0FA;}
+.rowstyle4   {}
+.rowstyle5   {background: #EFF0FA;}
+.rowstyle6   {}
+.rowstyle7   {background: #EFF0FA;}
+
+.selected {background: #DAE1F9;}
+
+table.simple    {border: 1px solid #DAE1F9; border-collapse: collapse;}
+table.simple td {border: 1px solid #DAE1F9; text-align: center;} 
+table.simple th {border: 1px solid #DAE1F9; text-align: center; background-color: #2D4488; }
+table.simple A {color: #FFFFFF; font-weight: bold; text-decoration: none; }
+table.simple A:hover {color: #FFFFFF; font-weight: bold; text-decoration: underline; }
+
+table.filters    {border: 0px; border-collapse: collapse;}
+table.filters td {border: 0px; text-align: center;}
+table.filters th {border: 0px; text-align: center; font-weight: bold;}
+
+.TitleText 
+{
+  font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif; 
+  font-size: 26px; 
+  font-weight: plain;
+}
+
+.ReportTitleText 
+{
+  font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif; 
+  font-size: 18px; 
+  font-weight: plain;
+}
+
+table.template {background-color: #2D4488; border-left: 1px solid #AAAAAA; border-top: 1px solid #AAAAAA; border-right: 1px solid #000; border-bottom: 1px solid #000;}
+table.template A {color: #FFFFFF; font-weight: bold; text-decoration: none; }
+table.template A:hover {color: #FFFFFF; font-weight: bold; text-decoration: underline; }
+
+
+table.report    {border: 0; border-collapse: collapse;}
+table.report td {border: 0; text-align: center;} 
+table.report th {border: 0: text-align: center; padding-bottom: 5px; font-family: Tahoma;   font-size: 18px; font-weight: plain; }

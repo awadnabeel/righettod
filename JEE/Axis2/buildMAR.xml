@@ -1,0 +1,51 @@
+<!-- 
+ Build to create Axis Module Archive files (MAR) 
+ for modules (1 target by modules) :
+ -> "AuditModule" 
+
+ Note : Formatting of "echo" message are important and must be followed in new module build task added !
+ 
+ Author : D. Righetto 
+ Date   : March 2007 
+-->
+<project default="default" basedir=".">
+	
+	<description>Build to create Axis Module Archive files (MAR)</description>
+	
+	<!-- Project global properties -->
+	<property name="web.content.dir" value="WebContent" />
+	<property name="dist" value="tmp" />
+	
+	  <!-- Target entry point-->
+	  <target name="default">
+	  	    <delete dir="${dist}"/>
+	  	    <!-- Initiliaze list of default modules -->
+	 	    <echo file="${web.content.dir}/WEB-INF/modules/modules.list" append="false">addressing-1.1.1.mar</echo>
+	 	    <echo file="${web.content.dir}/WEB-INF/modules/modules.list" append="true">
+soapmonitor-1.1.1.mar</echo>	  	
+	  	    <!--Call MAR targets builders-->
+	  	    <antcall target="auditModuleMAR"/>
+	  	    
+	  </target>	
+
+	<!-- Target to build MAR for moduke : "AuditModule"-->
+	 <target name="auditModuleMAR" >	 	
+		<!-- Target specific properties -->
+		<property name="package.tree" value="com/drighetto/essai/axis2/modules" />		
+		<property name="module.xml.cfg.file.path" value="${web.content.dir}/WEB-INF/classes/${package.tree}" />
+		<property name="module.name" value="audit" />
+	 	
+	  	 <mkdir dir="${dist}/${package.tree}"/>
+	     <copy todir="${dist}/${package.tree}">
+		   <fileset dir="${web.content.dir}/WEB-INF/classes/${package.tree}" includes="**/*.class"/>              
+	     </copy>
+	 	 <mkdir dir="${dist}/META-INF"/>	
+	    <copy todir="${dist}/META-INF">
+		   <fileset dir="${module.xml.cfg.file.path}" includes="module.xml"/>              
+	    </copy>
+	    <jar destfile="${web.content.dir}/WEB-INF/modules/${module.name}.mar" basedir="${dist}" compress="false"/>
+	 	<echo file="${web.content.dir}/WEB-INF/modules/modules.list" append="true">
+${module.name}.mar</echo>
+		<delete dir="${dist}"/>
+	  </target>
+</project>

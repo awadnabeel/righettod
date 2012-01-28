@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+
+    <bean id="traductionService" class="be.hikage.spring.ws.service.TraductionServiceImpl"/>
+    <bean id="traductionEndpoint" class="be.hikage.spring.ws.endpoint.TraductionEndpoint">
+        <property name="traductionService" ref="traductionService"/>
+    </bean>
+
+    <!--
+
+        <bean id="jaxb1Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+            <property name="contextPath" value="be.hikage.spring.ws.jaxb.dto"/>
+        </bean>
+
+    -->
+
+    <bean id="wsSecurityInterceptor" class="org.springframework.ws.soap.security.xwss.XwsSecurityInterceptor">
+        <property name="policyConfiguration" value="classpath:/wss-server-config.xml"/>
+        <property name="callbackHandlers">
+            <list>
+                <bean id="passwordValidationHandler"
+                      class="org.springframework.ws.soap.security.xwss.callback.SimplePasswordValidationCallbackHandler">
+                    <property name="users">
+                        <props>
+                            <prop key="hikage">password</prop>
+                            <prop key="cafe">babe</prop>
+                        </props>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+        <property name="mappings">
+            <props>
+                <prop key="{http://www.hikage.be/schema/traduction}TraductionRequest">
+                    traductionEndpoint
+                </prop>
+            </props>
+        </property>
+        <property name="interceptors">
+            <list>
+                <bean class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor"/>
+                <ref bean="wsSecurityInterceptor"/>
+                <ref bean="traductionValidatingInterceptor"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="traductionValidatingInterceptor"
+          class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+        <property name="schema" value="/WEB-INF/traduction.xsd"/>
+        <property name="validateRequest" value="true"/>
+        <property name="validateResponse" value="true"/>
+    </bean>
+
+    <bean id="traduction" class="org.springframework.ws.wsdl.wsdl11.DynamicWsdl11Definition">
+        <property name="builder">
+            <bean
+                    class="org.springframework.ws.wsdl.wsdl11.builder.XsdBasedSoap11Wsdl4jDefinitionBuilder">
+                <property name="schema" value="/WEB-INF/traduction.xsd"/>
+                <property name="portTypeName" value="traduction"/>
+                <property name="locationUri" value="http://localhost:9090/traductionService/"/>
+            </bean>
+        </property>
+    </bean>
+
+</beans>

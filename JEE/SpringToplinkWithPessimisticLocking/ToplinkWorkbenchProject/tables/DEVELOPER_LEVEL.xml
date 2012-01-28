@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table>
+   <short-name>DEVELOPER_LEVEL</short-name>
+   <last-refresh-timestamp>2007-09-04T11:58:24.671</last-refresh-timestamp>
+   <columns>
+      <column>
+         <name>ID_LEVEL</name>
+         <type>NUMBER</type>
+         <size>22</size>
+         <unique>true</unique>
+         <primary-key>true</primary-key>
+      </column>
+      <column>
+         <name>LABEL_LEVEL</name>
+         <type>VARCHAR2</type>
+         <size>1000</size>
+         <allows-null>true</allows-null>
+      </column>
+   </columns>
+</table>

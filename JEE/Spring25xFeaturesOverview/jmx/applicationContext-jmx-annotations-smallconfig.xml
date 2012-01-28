@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<!-- Create a MBeanServer -->
+	<context:mbean-server id="myMBeanServer" />
+
+	<!-- Declare a bean that will be automatically exported as MBean  (simple annoted pojo) -->
+	<bean id="simplePojoMBean1"
+		class="com.drighetto.spring25x.jmx.SimpleMBeanWithJava5Annotations" />
+
+	<!-- Export the beans in the MBean server -->
+	<context:mbean-export server="myMBeanServer" />
+
+
+</beans>

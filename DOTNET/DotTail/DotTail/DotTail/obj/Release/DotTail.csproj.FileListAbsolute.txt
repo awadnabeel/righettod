@@ -1,0 +1,14 @@
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\bin\Release\DotTail.exe.config
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Release\DotTail.exe
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Release\DotTail.pdb
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\bin\Release\DotTail.exe.manifest
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\bin\Release\DotTail.application
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\bin\Release\DotTail.exe
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\bin\Release\DotTail.pdb
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\bin\Release\DotTail.XML
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Release\ResolveAssemblyReference.cache
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Release\DotTail.Form1.resources
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Release\DotTail.Properties.Resources.resources
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Release\DotTail.csproj.GenerateResource.Cache
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Release\DotTail.exe.manifest
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\DotTail\DotTail\DotTail\obj\Release\DotTail.application

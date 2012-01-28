@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toplink-sessions version="10g Release 3 (10.1.3.1.0)" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <session xsi:type="server-session">
+      <name>Session</name>
+      <event-listener-classes/>
+      <logging xsi:type="toplink-log"/>
+      <primary-project xsi:type="xml">TOPLINK-SAMPLE.xml</primary-project>
+      <login xsi:type="database-login">
+         <platform-class>oracle.toplink.platform.database.oracle.Oracle10Platform</platform-class>
+         <sequencing>
+            <default-sequence xsi:type="table-sequence">
+               <name>Default</name>
+            </default-sequence>
+         </sequencing>
+         <bind-all-parameters>true</bind-all-parameters>
+         <cache-all-statements>true</cache-all-statements>
+      </login>
+      <connection-pools>
+         <read-connection-pool>
+            <name>ReadConnectionPool</name>
+         </read-connection-pool>
+         <write-connection-pool>
+            <name>default</name>
+         </write-connection-pool>
+      </connection-pools>
+      <connection-policy/>
+   </session>
+</toplink-sessions>

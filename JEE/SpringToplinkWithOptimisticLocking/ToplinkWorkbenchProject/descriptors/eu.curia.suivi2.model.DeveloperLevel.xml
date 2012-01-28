@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<descriptor type="relational">
+   <name>eu.curia.suivi2.model.DeveloperLevel</name>
+   <class-handle>
+      <type-name>eu.curia.suivi2.model.DeveloperLevel</type-name>
+   </class-handle>
+   <transactional-policy type="relational">
+      <descriptor-alias>DeveloperLevel</descriptor-alias>
+      <refresh-cache-policy/>
+      <caching-policy/>
+      <query-manager type="relational"/>
+      <locking-policy type="relational">
+         <locking-type>Optimistic Locking</locking-type>
+         <version-locking-type>Version Locking</version-locking-type>
+         <store-in-cache>false</store-in-cache>
+         <version-locking-column-handle>
+            <column-table-name>DEVELOPER_LEVEL</column-table-name>
+            <column-name>OPTIMISTIC_LOCK_ID</column-name>
+         </version-locking-column-handle>
+         <optimistic-locking-type>Version Locking</optimistic-locking-type>
+      </locking-policy>
+      <conform-results-in-unit-of-work>true</conform-results-in-unit-of-work>
+      <primary-key-policy>
+         <primary-key-handles>
+            <column-handle>
+               <column-table-name>DEVELOPER_LEVEL</column-table-name>
+               <column-name>ID_LEVEL</column-name>
+            </column-handle>
+         </primary-key-handles>
+      </primary-key-policy>
+   </transactional-policy>
+   <mappings>
+      <mapping type="one-to-many">
+         <name>developerCollection</name>
+         <attribute-handle>
+            <attribute-declaring-type-name>eu.curia.suivi2.model.DeveloperLevel</attribute-declaring-type-name>
+            <attribute-name>developerCollection</attribute-name>
+         </attribute-handle>
+         <reference-descriptor-handle>
+            <descriptor-name>eu.curia.suivi2.model.Developer</descriptor-name>
+         </reference-descriptor-handle>
+         <indirection-type>transparentIndirection</indirection-type>
+         <reference-handle>
+            <reference-table-name>DEVELOPER</reference-table-name>
+            <reference-name>SYS_C004028</reference-name>
+         </reference-handle>
+         <container-policy type="collection">
+            <container-class>
+               <uses-default-container-class>true</uses-default-container-class>
+            </container-class>
+         </container-policy>
+      </mapping>
+      <mapping type="direct-to-field">
+         <name>idLevel</name>
+         <attribute-handle>
+            <attribute-declaring-type-name>eu.curia.suivi2.model.DeveloperLevel</attribute-declaring-type-name>
+            <attribute-name>idLevel</attribute-name>
+         </attribute-handle>
+         <column-handle>
+            <column-table-name>DEVELOPER_LEVEL</column-table-name>
+            <column-name>ID_LEVEL</column-name>
+         </column-handle>
+      </mapping>
+      <mapping type="direct-to-field">
+         <name>labelLevel</name>
+         <attribute-handle>
+            <attribute-declaring-type-name>eu.curia.suivi2.model.DeveloperLevel</attribute-declaring-type-name>
+            <attribute-name>labelLevel</attribute-name>
+         </attribute-handle>
+         <column-handle>
+            <column-table-name>DEVELOPER_LEVEL</column-table-name>
+            <column-name>LABEL_LEVEL</column-name>
+         </column-handle>
+      </mapping>
+      <mapping type="direct-to-field">
+         <name>optimisticLockId</name>
+         <attribute-handle>
+            <attribute-declaring-type-name>eu.curia.suivi2.model.DeveloperLevel</attribute-declaring-type-name>
+            <attribute-name>optimisticLockId</attribute-name>
+         </attribute-handle>
+         <column-handle>
+            <column-table-name>DEVELOPER_LEVEL</column-table-name>
+            <column-name>OPTIMISTIC_LOCK_ID</column-name>
+         </column-handle>
+      </mapping>
+   </mappings>
+   <primary-table-handle>
+      <table-name>DEVELOPER_LEVEL</table-name>
+   </primary-table-handle>
+</descriptor>

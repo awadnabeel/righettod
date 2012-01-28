@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-fragment id="WebFragment_ID" version="3.0"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd">
+
+	<!-- If we enable the display name Tomcat throw the exception "The display 
+		name was defined in multiple fragments with different values including fragment 
+		with name [JEE6Servlet3WebFragment02] located at [jar:jndi:/localhost/JEE6Servlet3/WEB-INF/lib/JEE6Servlet3-WebFragment02.jar!/]" -->
+	<!-- <display-name>MyWebFragment01</display-name> -->
+	<name>JEE6Servlet3WebFragment01</name>
+
+	<!-- Define load relative ordering -->
+	<!-- Specify here that this module must be loaded before the module named 
+		"JEE6Servlet3WebFragment02" -->
+	<ordering>
+		<before>
+			<name>JEE6Servlet3WebFragment02</name>
+		</before>
+	</ordering>
+
+	<!-- Declare the special case for the sample servlet 7 showing successive 
+		additivity configuration over main app. and web fragments -->
+	<context-param>
+		<description>Parameter used to show that the main app. "web.xml" take always the precedence over all web fragments configuration !</description>
+		<param-name>param</param-name>
+		<param-value>Bonjour</param-value>
+	</context-param>
+	<context-param>
+		<param-name>param01</param-name>
+		<param-value>World</param-value>
+	</context-param>
+
+	<!-- Define module web components -->
+	<filter>
+		<filter-name>Sample04SyncFilter</filter-name>
+		<filter-class>com.righettod.jee6s3.filter.Sample04SyncFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Sample04SyncFilter</filter-name>
+		<url-pattern>/Sample04SyncServlet</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>Sample04SyncServlet</servlet-name>
+		<servlet-class>com.righettod.jee6s3.servlet.Sample04SyncServlet</servlet-class>
+		<async-supported>false</async-supported>
+	</servlet>
+	<!-- Declare the special case for the sample servlet 6 showing successive 
+		component configuration over web fragments -->
+	<servlet>
+		<servlet-name>Sample06SyncServlet</servlet-name>
+		<servlet-class>com.righettod.jee6s3.servlet.Sample06SyncServlet</servlet-class>
+		<async-supported>false</async-supported>
+		<init-param>
+			<description>Parameter used to show that the main app. "web.xml" take always the precedence over all web fragments configuration !</description>
+			<param-name>msg00</param-name>
+			<param-value>Value01</param-value>
+		</init-param>
+		<init-param>
+			<param-name>msg01</param-name>
+			<param-value>World</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Sample04SyncServlet</servlet-name>
+		<url-pattern>/Sample04SyncServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Sample06SyncServlet</servlet-name>
+		<url-pattern>/Sample06SyncServlet</url-pattern>
+	</servlet-mapping>
+
+</web-fragment>

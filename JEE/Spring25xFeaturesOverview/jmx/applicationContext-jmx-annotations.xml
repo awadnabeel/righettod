@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<!-- Create a MBeanServer -->
+	<bean id="mbeanServer"
+		class="org.springframework.jmx.support.MBeanServerFactoryBean">
+		<!-- indicate to first look for a server -->
+		<property name="locateExistingServerIfPossible" value="true" />
+	</bean>
+	
+	<!-- Declare a bean that will be exported as MBean forward (simple annoted pojo) -->
+	<bean id="simplePojoMBean"
+		class="com.drighetto.spring25x.jmx.SimpleMBeanWithJava5Annotations" />	
+
+	<!-- Export the beans in the MBean server -->
+	<bean id="exporter"
+		class="org.springframework.jmx.export.MBeanExporter">
+		<!-- Activate the autodectection of the annoted MBean to export -->
+		<property name="autodetect" value="true" />
+		<!-- MBeanServer to use -->
+		<property name="server" ref="mbeanServer" />
+		<!-- set the MBean registration behavior -->
+		<property name="registrationBehaviorName"
+			value="REGISTRATION_REPLACE_EXISTING" />
+		<!-- configure the assembler and the namingStrategy in order to use Java5 JMX annotations -->
+		<property name="assembler" ref="assembler" />
+		<property name="namingStrategy" ref="namingStrategy" />
+		<!-- Configure the notifications listeners -->
+	    <property name="notificationListenerMappings">
+	      <map>
+	        <entry key="bean:name=simpleMBeanWithJava5Annotations">
+	          <bean class="com.drighetto.spring25x.jmx.SimpleNotificationListener"/>
+	        </entry>
+	      </map>
+	    </property>		
+	</bean>
+	
+
+	<!--
+		===========================================================================
+		Add beans to configure the use of Java5 JMX annotations support by Spring
+		=========================================================================== 
+	-->
+	<!-- Give a JmxAttributeSource interface implementation provied by Spring-->
+	<bean id="jmxAttributeSource"
+		class="org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource" />
+
+	<!-- Will create management interface using annotation metadata -->
+	<bean id="assembler"
+		class="org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler">
+		<property name="attributeSource" ref="jmxAttributeSource" />
+	</bean>
+	<!-- Will pick up the ObjectName from the annotation -->
+	<bean id="namingStrategy"
+		class="org.springframework.jmx.export.naming.MetadataNamingStrategy">
+		<property name="attributeSource" ref="jmxAttributeSource" />
+	</bean>
+
+</beans>

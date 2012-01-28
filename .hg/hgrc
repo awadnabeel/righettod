@@ -1,0 +1,12 @@
+[paths]
+default = https://righettod.googlecode.com/hg/
+
+[ui]
+username = righettod <dominique.righetto@gmail.com>
+
+[extensions]
+progress =
+color = 
+
+[tortoisehg]
+authorcolor = True

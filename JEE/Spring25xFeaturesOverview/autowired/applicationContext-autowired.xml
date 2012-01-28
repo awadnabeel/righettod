@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<!-- Activate the annotation configured bean to use with the 'Configure' annotation -->
+	<context:spring-configured />
+	<context:load-time-weaver aspectj-weaving="on"/>
+
+	<!-- Activate the auto-detection of components in the specified package -->
+	<context:component-scan
+		base-package="com.drighetto.spring25x.autowired" />
+
+	<!-- Activate the configuration by annotations -->
+	<context:annotation-config />
+
+	<!-- BEANS -->
+	<bean id="dbProcessorV1"
+		class="com.drighetto.spring25x.autowired.DBProcessorV1" />
+	<bean id="dbProcessorV2"
+		class="com.drighetto.spring25x.autowired.DBProcessorV2" />
+
+	<!-- Template of configuration for a bean that use the 'Configure' annotation -->
+	<bean id="simplePojo"
+		class="com.drighetto.spring25x.autowired.SimplePojo"
+		scope="prototype">
+	</bean>
+
+
+
+</beans>

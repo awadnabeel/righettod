@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>File Download Relay</title>
+<style type="text/css">
+.input {
+	margin-right:2px;
+	margin-left:10px;
+	padding:6px;
+	width:375px;
+	border: 1px solid #B8B8B8;
+	
+	/*FONTS*/
+	font-family:"Arial";
+	font-size:9pt;
+	color:#464646;
+	font-weight:500;
+	text-decoration:none;
+	letter-spacing: 0pt;
+	line-height:100%;
+}
+		
+.button {
+	padding: 4px;
+	background-color:#4C4C4C;
+	border: 1px solid #B8B8B8;
+
+	/*FONTS*/
+	font-family:"Arial";
+	font-size:10.5pt;
+	color:#ffffff;
+	font-weight:700;			
+	letter-spacing: 1px;			
+}
+
+
+body {
+	background-color: #FFFFFF;
+	font-family: "Arial";
+	font-size: 9pt;
+	color: #464646;
+	font-weight: 700;
+	text-decoration: none;
+	letter-spacing: 0pt;
+	line-height: 100%;
+	}
+	
+label {
+	font-family:"Arial";
+	font-size:16pt;
+	color:#595959;	
+	font-weight:600;
+	text-decoration:none;
+	letter-spacing: 0pt;
+	line-height:100%;
+	display:inline;
+}
+
+</style>
+</head>
+
+<body>
+	<div id="content" style="text-align: center;">
+	This small web application provide a relay to download a file, you can use it when your web proxy do not allow you to download directly the desired file....
+	<br /><br />	
+		<form method="post" action="/DownloadRelay">
+		<label for="srcurl">File URL: </label>
+		<input type="text" name="srcurl" id="srcurl" tabindex="1" class="input" />
+		&nbsp;&nbsp;
+		<input type="submit" value="Download" tabindex="2" class="button">
+		</form>
+	<br /><br />
+	The file maximum downlodeable size is restricted by Google App Engine itself, see limit <a href="http://code.google.com/appengine/docs/java/urlfetch/overview.html#Quotas_and_Limits" target="_blank">here</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+/* ********************** */
+/* Gradle Build Script    */     
+/* ********************** */
+//Use Java plugins in order to have base tasks for Java project type
+apply plugin: 'java'
+//Configure some compilations and others properties
+sourceCompatibility = 1.5
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Jasypt Sample', 'Implementation-Version': version
+    }
+}
+//Define third party libraries repository (Maven in our case)
+repositories {
+	mavenCentral()
+}
+//Define dependencies
+dependencies {
+    compile group: 'org.jasypt', name: 'jasypt', version: '1.5'
+	compile group: 'junit', name: 'junit', version: '4.5'
+	compile group: 'commons-io', name: 'commons-io', version: '1.4'
+	compile group: 'commons-codec', name: 'commons-codec', version: '1.3'
+}

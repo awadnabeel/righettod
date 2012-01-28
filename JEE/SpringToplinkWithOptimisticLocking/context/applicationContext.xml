@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	<!-- ==================================Datasource================================== -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url"
+			value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="MyTestUser" />
+		<property name="password" value="MyTestUser" />
+	</bean>
+
+	<!-- ==================================Toplink session factory================================== -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.toplink.LocalSessionFactoryBean">
+		<property name="configLocation" value="session.xml" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="sessionLog">
+			<bean
+				class="org.springframework.orm.toplink.support.CommonsLoggingSessionLog" />
+		</property>
+	</bean>
+
+	<!-- ==================================Transactions================================== -->
+	<!-- Transaction manager for a single TopLink SessionFactory (alternative to JTA) -->
+	<bean id="txManager"
+		class="org.springframework.orm.toplink.TopLinkTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Define pointcut for txAdvices -->
+	<aop:config>
+	   <!-- DAO Layer -->
+		<aop:advisor advice-ref="txAdviceDao" pointcut="execution(* eu.curia.suivi2.dao.impl.TopLinkDBOperations.*(..))" />
+	   <!-- DataManager Layer -->
+		<aop:advisor advice-ref="txAdviceDataManager" pointcut="execution(* eu.curia.suivi2.datamanager.*.action(..))" />		
+	</aop:config>
+
+	<!-- the transactional advice for DAO layer -->
+	<tx:advice id="txAdviceDao" transaction-manager="txManager">
+		<!-- the transactional semantics... -->
+		<tx:attributes>
+			<!-- All methods must use a existing transaction -->
+			<tx:method name="*" isolation="READ_COMMITTED" timeout="10" propagation="MANDATORY" read-only="false" rollback-for="org.springframework.dao.DataAccessException,oracle.toplink.exceptions.OptimisticLockException"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- the transactional advice for DataManager layer -->
+	<tx:advice id="txAdviceDataManager" transaction-manager="txManager">
+		<!-- the transactional semantics... -->
+		<tx:attributes>
+			<!-- All methods create or use a transaction transaction -->
+			<tx:method name="*" isolation="READ_COMMITTED" timeout="10" propagation="REQUIRED" read-only="false" rollback-for="org.springframework.dao.DataAccessException,oracle.toplink.exceptions.OptimisticLockException"/>
+		</tx:attributes>
+	</tx:advice>	
+	
+	<!-- ==================================Beans================================== -->
+	<bean  id="dbOperations" class="eu.curia.suivi2.dao.impl.TopLinkDBOperations" >
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+		
+	<bean id="readerThread" class="eu.curia.suivi2.datamanager.Reader">
+	 	<property name="dbDao" ref="dbOperations" />
+	</bean>
+		
+	<bean id="updaterThread" class="eu.curia.suivi2.datamanager.Updater">
+	 	<property name="dbDao" ref="dbOperations" />
+	</bean>		
+	
+	<bean id="updaterNoWaitThread" class="eu.curia.suivi2.datamanager.UpdaterNoWait">
+	 	<property name="dbDao" ref="dbOperations" />
+	</bean>		
+	
+		
+
+
+</beans>

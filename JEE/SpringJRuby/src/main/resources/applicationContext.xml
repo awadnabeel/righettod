@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.5.xsd">
+
+	<!-- 
+	    Defintion of a bean with a Java interface and a JRuby implementation.
+	 
+		We use the "refresh-check-delay" attribute to specify the interval between which the Spring container will check 
+		for script file modification and synchronize the instance provided.
+		
+		Remarks from the Spring documentation about the "refresh-check-delay" attribute :
+			It is important to understand that changes to a script will not trigger a refresh if the changes occur within 
+		the window of the 'refresh-check-delay' value. It is equally important to understand that changes to the script 
+		are not actually 'picked up' until a method is called on the dynamic-language-backed bean. 
+			It is only when a method is called on a dynamic-language-backed bean that it checks to see if its
+		underlying script source has changed. Any exceptions relating to refreshing the script 
+		(such as encountering a compilation error, or finding that the script file has been deleted) will result
+		in a fatal  exception being propagated to the calling code.	
+			The refreshable bean behavior described above does not apply to dynamic language source files defined 
+		using the <lang:inline-script/> element notation. Additionally, it only applies to beans where changes 
+		to the underlying source file can actually be detected; for example, by code that checks the last modified 
+		date of a dynamic language source file that exists on the filesystem.		
+		
+	-->
+	<lang:jruby id="actionDefinition" refresh-check-delay="5000" scope="prototype"
+		script-interfaces="com.drighetto.springjruby.ActionDefinition"
+		script-source="classpath:/jruby/action_definition_jruby_impl.rb">
+		<lang:property name="last_called_method" value="No method called" />
+	</lang:jruby>
+	
+	
+	<!-- 
+	Defintion of a bean with a Java interface and a JRuby implementation but this time the JRby script 
+	is not in a separated file but is in the Spring declaratation, this type of declaration is named "inline-script" script
+	
+	The script defined below is a copy/paste of the content of the script in the separated file.
+	-->
+	<lang:jruby id="actionDefinitionInline" script-interfaces="com.drighetto.springjruby.ActionDefinition">
+		<lang:inline-script>
+			#Needed to use java
+			require 'java'
+			
+			#JRuby implementation of the "com.drighetto.springjruby.ActionDefinition" Java interface
+			class ActionDefinitionJRubyImpl
+			  
+			  #Indicate that this JRuby class implement the "com.drighetto.springjruby.ActionDefinition" Java interface
+			  include com.drighetto.springjruby.ActionDefinition
+			  
+			  #Define instance attribute accessor
+			  attr_reader :last_called_method
+			  
+			  #Constructor        
+			  def initialize()
+			    @last_called_method = ""
+			  end
+			  
+			  #Explicit Java Style Setter method required by Spring !!!
+			  def setLast_called_method(text)
+			    @last_called_method  = text
+			  end 
+			  
+			  #Implementation of the writeContent() method
+			  def writeContent(content, filename)
+			    my_file = File.new(filename, "w")
+			    my_file.puts content
+			    my_file.close
+			    @last_called_method  = "writeContent() on #{filename}"
+			  end
+			  
+			  #Implementation of the readContent() method
+			  def readContent(filename)
+			    content = ""    
+			    my_file = File.new(filename, "r")
+			    while (line = my_file.gets)
+			      content = content + line      
+			    end
+			    my_file.close
+			    @last_called_method  = "readContent() on #{filename}"
+			    return content
+			  end
+			  
+			  #Implementation of the obtainLastMethodCalled() method
+			  def obtainLastMethodCalled()
+			    return @last_called_method
+			  end
+			  
+			end		
+		</lang:inline-script>
+		<lang:property name="last_called_method" value="No method called" />		
+	</lang:jruby>	
+	
+</beans>

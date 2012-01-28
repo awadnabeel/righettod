@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<!-- Datasource bean -->
+	<bean id="dataSource" singleton="true" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:oracle:thin:@localhost:1521:xe</value>
+		</property>
+		<property name="username">
+			<value>MyTestUser</value>
+		</property>
+		<property name="password">
+			<value>MyTestUser</value>
+		</property>
+	</bean>
+
+	<!-- Value List Handler bean -->
+	<bean id="valueListHandler" singleton="true"
+		class="net.mlw.vlh.DefaultValueListHandlerImpl">
+		<property name="config.adapters">
+			<map>
+				<!-- Customized adapter retrieving developers collection (all)-->
+				<entry key="allDevelopers">
+					<bean
+						class="net.mlw.vlh.adapter.jdbc.dynabean.DefaultDynaBeanAdapter">
+						<property name="dataSource">
+							<ref bean="dataSource" />
+						</property>
+						<property name="useName">
+							<value>true</value>
+						</property>
+						<property name="adapterType">
+							<value>1</value>
+						</property>
+						<property name="defaultNumberPerPage">
+							<value>2</value>
+						</property>
+						<property name="defaultSortColumn">
+							<value>dname</value>
+						</property>
+						<property name="defaultSortDirection">
+							<value>desc</value>
+						</property>
+						<!-- Then SQL code between "/~ ~/" is used by filters tag in view -->
+						<property name="sql">
+							<value>
+								SELECT D.ID_DEVELOPER AS did,
+								D.NAME_DEVELOPER AS dname, L.LABEL_LEVEL
+								AS dlevel FROM DEVELOPER D,
+								DEVELOPER_LEVEL L WHERE
+								D.ID_DEVELOPER_LEVEL = L.ID_LEVEL
+								/~dname: AND D.NAME_DEVELOPER LIKE
+								{dname}~/
+							</value>
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Put others adapters here... -->
+
+	<!-- ValueList config bean -->
+	<bean id="classicLook" singleton="true"
+		class="net.mlw.vlh.web.ValueListConfigBean">
+		<property name="displayHelper">
+			<bean class="net.mlw.vlh.web.util.PassThroughDisplayHelper" />
+		</property>
+		<property name="linkEncoder">
+			<bean
+				class="net.mlw.vlh.web.tag.support.DefaultLinkEncoder" />
+		</property>
+		<property name="messageSource">
+			<bean
+				class="org.springframework.context.support.ResourceBundleMessageSource">
+				<property name="basename">
+					<value>classicLook</value>
+				</property>
+			</bean>
+		</property>
+		<property name="styleCount">
+			<value>8</value>
+		</property>
+		<property name="stylePrefix">
+			<value>classicLook</value>
+		</property>
+		<property name="displayProviders">
+			<map>
+				<entry key="html">
+					<bean id="classicLookHtmlDisplayProvider"
+						class="net.mlw.vlh.web.tag.support.HtmlDisplayProvider">
+						<property name="imageHome">
+							<value>images</value>
+						</property>
+					</bean>
+				</entry>
+				<entry key="csv">
+					<bean id="csvDisplayProvider"
+						class="net.mlw.vlh.web.tag.support.CsvDisplayProvider" />
+				</entry>
+				<entry key="excel">
+					<bean id="excelDisplayProvider"
+						class="net.mlw.vlh.web.tag.support.ExcelDisplayProvider" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+</beans>

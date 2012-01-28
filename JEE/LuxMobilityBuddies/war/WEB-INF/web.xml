@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+	<!-- Web app. configuration for JSP : GAE interprets this DD as 2.3 Servlet DD thus this config is only applied if you set it on the each page :o(  -->
+	<jsp-config>
+		<jsp-property-group>
+			<el-ignored>false</el-ignored>
+			<scripting-invalid>false</scripting-invalid>
+			<url-pattern>*.jsp</url-pattern>
+		</jsp-property-group>
+	</jsp-config>
+
+	<!--  Application Front Controller Filter -->
+	<filter>	
+		<filter-name>FrontController</filter-name>
+		<filter-class>com.drighetto.lmb.service.FrontController</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FrontController</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- Welcome pages -->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>main.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>

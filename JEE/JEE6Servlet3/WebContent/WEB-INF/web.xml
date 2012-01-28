@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>JEE6Servlet3</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- Declare the special case for the sample servlet 7 showing successive 
+		additivity configuration over main app. and web fragments -->
+	<context-param>
+		<param-name>param</param-name>
+		<param-value>Olà</param-value>
+	</context-param>
+	<context-param>
+		<param-name>param00</param-name>
+		<param-value>Hello</param-value>
+	</context-param>
+
+	<!-- Declare the special case for the sample servlet 6 showing successive 
+		component configuration over web fragments -->
+	<servlet>
+		<servlet-name>Sample06SyncServlet</servlet-name>
+		<servlet-class>com.righettod.jee6s3.servlet.Sample06SyncServlet</servlet-class>
+		<async-supported>false</async-supported>
+		<init-param>
+			<description>Parameter used to show that the main app. "web.xml" take always the precedence over all web fragments configuration !</description>
+			<param-name>msg00</param-name>
+			<param-value>Hello</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Sample06SyncServlet</servlet-name>
+		<url-pattern>/Sample06SyncServlet</url-pattern>
+	</servlet-mapping>
+</web-app>

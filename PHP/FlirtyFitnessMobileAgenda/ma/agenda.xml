@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agenda version="1.0" lastUpdate="18/09/2011">
+  <advertisement>
+  <![CDATA[ 
+  Masterclass de Self Defense le samedi 8 octobre de 17h a 19h.<br />
+  Prix : 30 Euros.
+  <br/><br/>
+  Masterclass Self Defense on Saturday October 8th from 5 p.m. until 7 p.m..<br />
+  Price : 30 Euros.
+  ]]>
+  </advertisement>	
+  <day label="Monday - Lundi" order="1">
+    <class time="11h00-12h00" label="Abs/Fes/Cuisse" level="all" studio="Pole Studio" instructor="Jojo"/>
+    <class time="12h00-12h30" label="Cardio Intensif" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="12h30-13h30" label="Steps" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="12h30-13h30" label="Sexy Flexy" level="all" studio="Pole Studio" instructor="Jenny/Jojo"/>
+    <class time="13h30-14h00" label="Party Queen" level="all" studio="Pole Studio" instructor="Jojo"/>
+    <class time="17h30-18h30" label="Abs/Fes/Cuisse" level="all" studio="Fitness Studio" instructor="Jojo"/>
+    <class time="18h30-19h30" label="Chair Dancing" level="all" studio="Fitness Studio" instructor="Jojo"/>
+    <class time="18h30-20h00" label="Aerial Pole Dancing" level="Advanced" studio="Pole Studio" instructor="Jenny"/>
+    <class time="19h30-20h30" label="Zumba" level="all" studio="Fitness Studio" instructor="Michaela"/>
+    <class time="20h00-21h30" label="Aerial Pole Dancing" level="Beginner" studio="Pole Studio" instructor="Jenny"/>
+  </day>
+  <day label="Tuesday - Mardi" order="2">
+    <class time="11h00-11h30" label="30 min. Sexy Flexy" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="11h30-12h30" label="Abs/Fes/Cuisse" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="12h30-13h30" label="Strength Conditioning" level="all" studio="Pole Studio" instructor="Jojo"/>
+    <class time="12h30-13h30" label="Exotic Dancing" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="13h30-14h00" label="Exotic Dancing - Special Voile" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="14h00-15h00" label="Eveil Jazz" level="4/6 years old" studio="Fitness Studio" instructor="Maryline"/>
+    <class time="15h00-16h00" label="Initiation Jazz" level="7/9 years old" studio="Fitness Studio" instructor="Maryline"/>
+    <class time="16h30-17h30" label="Jazz II" level="12/14 yeanrs old" studio="Fitness Studio" instructor="Maryline"/>
+    <class time="17h30-18h30" label="Yogalates" level="all" studio="Fitness Studio" instructor="Jenny"/>
+    <class time="18h30-20h00" label="Aerial Pole Dancing" level="Intermediate" studio="Pole Studio" instructor="Jojo"/>
+    <class time="18h30-19h30" label="Mix Latino" level="all" studio="Fitness Studio" instructor="Neto"/>
+    <class time="19h30-20h30" label="Extreme Bikini Camp" level="all" studio="Fitness Studio" instructor="Sandrine"/>
+    <class time="20h00-21h30" label="Pole Choregraphy" level="Open Level" studio="Pole Studio" instructor="Jojo"/>
+  </day>
+  <day label="Wednesday - Mercredi" order="3">
+    <class time="11h00-12h00" label="Strength Conditioning" level="all" studio="Pole Studio" instructor="Amanda"/>
+    <class time="12h00-12h30" label="Ball Tonic" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="12h30-13h30" label="Zumba" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="12h30-13h30" label="Abs/Fes/Cuisse" level="all" studio="Pole Studio" instructor="Jojo"/>
+    <class time="13h30-14h30" label="Samba Fit" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="17h30-18h30" label="Strength Conditioning" level="all" studio="Fitness Studio" instructor="Jojo"/>
+    <class time="18h30-19h30" label="Sexy Flexy" level="all" studio="Pole Studio" instructor="Jojo"/>
+    <class time="18h30-19h30" label="Extreme Bikini Camp" level="all" studio="Fitness Studio" instructor="Sandrine"/>
+    <class time="19h30-21h30" label="Aerial Pole Dancing" level="Intermediate" studio="Pole Studio" instructor="Jenny"/>
+    <class time="19h30-20h30" label="High Heels Aerobic" level="all" studio="Fitness Studio" instructor="Jojo"/>
+    <class time="21h00-22h30" label="Kizomba" level="Intermediate" studio="Fitness Studio" instructor="Kika"/>
+  </day>
+  <day label="Thursday - Jeudi" order="4">
+    <class time="11h00-12h00" label="Soft Gym" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="12h00-12h30" label="30 min Get Fit" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="12h30-13h30" label="Extreme Bikini Camp" level="all" studio="Fitness Studio" instructor="Jojo"/>
+    <class time="12h30-13h30" label="Yogalates" level="all" studio="Pole Studio" instructor="Jenny"/>
+    <class time="13h30-14h00" label="30 min Sexy Flexy" level="all" studio="Pole Studio" instructor="Amanda"/>
+    <class time="13h30-14h30" label="Eveil Jazz" level="4/6 years old" studio="Fitness Studio" instructor="Maryline"/>
+    <class time="14h30-16h00" label="Initiation Jazz" level="7/9 years old" studio="Fitness Studio" instructor="Maryline"/>
+    <class time="16h00-17h30" label="Jazz II" level="12/14 yeanrs old" studio="Fitness Studio" instructor="Maryline"/>
+    <class time="18h00-18h30" label="Party Queen" level="all" studio="Fitness Studio" instructor="Jojo"/>
+    <class time="18h30-19h30" label="Sexy Fight" level="all" studio="Fitness Studio" instructor="Jojo"/>
+    <class time="18h30-20h00" label="Aerial Pole Dancing" level="Expert" studio="Pole Studio" instructor="Jenny"/>
+    <class time="19h30-20h30" label="Yogalates" level="all" studio="Fitness Studio" instructor="Jenny"/>
+    <class time="20h00-21h30" label="Aerial Pole Dancing" level="Open Level" studio="Pole Studio" instructor="Jojo"/>
+  </day>
+  <day label="Friday - Vendredi" order="5">
+    <class time="11h00-11h30" label="Cardio Intensif" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="11h30-12h30" label="30 min ABS" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="12h00-12h30" label="30 min Bras/Dos" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="12h30-13h30" label="Aerial Pole Dancing" level="Open Level" studio="Pole Studio" instructor="Jojo"/>
+    <class time="12h30-13h30" label="Zumba" level="all" studio="Fitness Studio" instructor="Amanda"/>
+    <class time="17h30-18h30" label="Abs/Fes/Cuisse" level="all" studio="Fitness Studio" instructor="Jojo"/>
+    <class time="18h30-20h00" label="Aerial Pole Dancing" level="Beginner" studio="Pole Studio" instructor="Jenny"/>
+    <class time="18h30-19h30" label="African Fit" level="all" studio="Fitness Studio" instructor="Jojo"/>
+    <class time="19h30-20h30" label="Zumba" level="all" studio="Fitness Studio" instructor="Jojo"/>
+  </day>
+  <day label="Saturday - Samedi" order="6">
+    <class time="9h00-10h00" label="Eveil Jazz" level="4/6 years old" studio="Fitness Studio" instructor="Maryline"/>
+    <class time="10h00-11h00" label="Open Ballet" level="All" studio="Fitness Studio" instructor="Maryline"/>
+    <class time="11h00-13h30" label="Circuit GET FIT" level="all" studio="Fitness Studio" instructor="Jenny/Jojo"/>
+    <class time="13h30-14h30" label="African Tribal Danse" level="All" studio="Fitness Studio" instructor="Pat"/>
+    <class time="14h30-15h30" label="Jazz II/III" level="12/17 years old" studio="Fitness Studio" instructor="Maryline"/>
+    <class time="15h30-17h00" label="Jazz Choragraphy" level="All" studio="Fitness Studio" instructor="Maryline"/>
+  </day>
+  <day label="Sunday - Dimanche" order="7">
+    <class time="17h00-18h30" label="Kizomba" level="Intermediate" studio="Fitness Studio" instructor="Kika"/>
+    <class time="18h30-20h00" label="Kizomba" level="Beginner" studio="Fitness Studio" instructor="Kika"/>
+  </day>
+</agenda>

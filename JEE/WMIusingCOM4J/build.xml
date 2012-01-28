@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ant script providing some utility task-->
+<project name="project">
+	
+    <description>Ant script providing some utility task</description>
+	
+	<!-- Define a classpath -->
+	  <path id="com4j.classpath">
+	    <fileset dir="lib" includes="*.jar"/>
+	    <pathelement location="extra"/>
+	  </path>
+	
+	<!-- Define "tlbimp" ant task -->
+	  <taskdef resource="com4j/tlbimp/ant.properties">
+	    <classpath refid="com4j.classpath" />
+	  </taskdef>	
+	
+	<!-- Task to generate Java Type Definition (JTD) from a COM type library -->
+	<target name="generate.java.type.definition">
+		<property name="java.type.definition.target.dir" value="others/java-type-definition-generated"/>
+		<delete dir="${java.type.definition.target.dir}" />
+		<mkdir dir="${java.type.definition.target.dir}" />
+		<!-- Generate JTD from the "wbemdisp.tlb" COM library (library of WMI)-->
+	    <tlbimp libid="565783C6-CB41-11D1-8B02-00600806D9B6"
+	      destdir="${java.type.definition.target.dir}" package="com.drighetto.wmicom4j.wmijtd" />		
+		<echo>JTD from the "wbemdisp.tlb" COM library generated to "${java.type.definition.target.dir}" directory</echo>
+	</target>
+	
+
+
+
+</project>
+

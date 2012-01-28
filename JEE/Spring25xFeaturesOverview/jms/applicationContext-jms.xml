@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-2.5.xsd">
+
+	<!-- A pooling based JMS provider -->
+	<bean id="jmsFactory"
+		class="org.apache.activemq.pool.PooledConnectionFactory"
+		destroy-method="stop">
+		<property name="connectionFactory">
+			<bean
+				class="org.apache.activemq.ActiveMQConnectionFactory">
+				<property name="brokerURL" value="tcp://localhost:61616" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- Spring JMS Template -->
+	<bean id="myJmsTemplate"
+		class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="jmsFactory" />
+		<property name="pubSubDomain" value="true" />
+	</bean>
+
+	<!-- JMS Message Producer -->
+	<bean id="myMessageProducer"
+		class="com.drighetto.spring25x.jms.MessageProducer">
+		<property name="jmsTemplate" ref="myJmsTemplate" />
+		<property name="destinationName" value="TOPIC.ONE" />
+	</bean>
+
+	<!-- JMS Message Consumers -->
+	<bean id="myMessageConsumer01"
+		class="com.drighetto.spring25x.jms.MessageConsumerV1">
+		<property name="messageConsumerName" value="JMS-MessageConsumer" />
+	</bean>
+	<bean id="myMessageConsumer02"
+		class="com.drighetto.spring25x.jms.MessageConsumerV2">
+		<property name="messageConsumerName" value="POJO-MessageConsumer" />
+	</bean>	
+	
+	<!-- JMS Listener Container -->
+	<jms:listener-container connection-factory="jmsFactory" container-type="default" destination-type="topic"  acknowledge="auto">
+	 	<jms:listener destination="TOPIC.ONE" ref="myMessageConsumer01" id="consumer01" />
+	 	<jms:listener destination="TOPIC.ONE" ref="myMessageConsumer02" id="consumer02" method="processMessage" />
+	</jms:listener-container>
+
+</beans>

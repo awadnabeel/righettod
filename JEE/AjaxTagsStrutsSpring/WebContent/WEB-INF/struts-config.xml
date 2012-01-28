@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<!--
+     This is a blank Struts configuration file with an example
+     welcome action/page and other commented sample elements.
+
+     Tiles and the Struts Validator are configured using the factory defaults
+     and are ready-to-use.
+
+     NOTE: If you have a generator tool to create the corresponding Java classes
+     for you, you could include the details in the "form-bean" declarations.
+     Otherwise, you would only define the "form-bean" element itself, with the
+     corresponding "name" and "type" attributes, as shown here.
+-->
+
+
+<struts-config>
+
+<!-- ============================================ Data Source Configuration -->
+
+
+<!-- ================================================ Form Bean Definitions -->
+
+    <form-beans>
+        <form-bean name="AjaxFormBean" type="org.apache.struts.action.DynaActionForm" />
+        <form-bean name="ReadMailFormBean" type="org.apache.struts.action.DynaActionForm" />
+    </form-beans>
+
+
+<!-- ========================================= Global Exception Definitions -->
+
+    <global-exceptions>
+
+    </global-exceptions>
+
+
+<!-- =========================================== Global Forward Definitions -->
+
+    <global-forwards>
+         
+    </global-forwards>
+
+
+<!-- =========================================== Action Mapping Definitions -->
+
+    <action-mappings>
+       <action
+           path="/ajax/askAnswer" 
+           name="AjaxFormBean"
+           scope="request"
+           type="org.springframework.web.struts.DelegatingActionProxy"
+           validate="false">
+        </action>  
+       <action
+           path="/readMail" 
+           name="ReadMailFormBean"
+           scope="request"
+           type="org.springframework.web.struts.DelegatingActionProxy"
+           validate="false">
+        <forward name="mailDisplayer" path="/jsp/mailDisplayer.jsp" redirect="true"/>
+        </action>                                              
+    </action-mappings>
+
+
+<!-- ============================================= Controller Configuration -->
+
+    <!-- <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>-->
+
+
+<!-- ======================================== Message Resources Definitions -->
+    
+    <!--Application messages ressources-->
+    <message-resources parameter="com.drighetto.essai.struts.resources.MessageResources" />
+
+<!-- =============================================== Plug Ins Configuration -->
+    <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+       <set-property property="contextConfigLocation" value="/WEB-INF/applicationContext.xml" />
+    </plug-in>
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml"/>
+		<set-property property="definitions-debug" value="2"/>
+		<set-property property="moduleAware" value="true" />
+		<set-property property="definitions-parser-details" value="2"/>
+		<set-property property="definitions-parser-validate" value="true"/>		
+	</plug-in>    
+
+
+</struts-config>
+

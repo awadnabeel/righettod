@@ -1,0 +1,11 @@
+****************
+* ACCESS RIGHT *   
+****************
+
+Access right specified in "right.gif" file must be set on :
+- "Tasks" folder
+- "Mailbox" root folder and "Drafts" folder
+
+------------------------
+Dominique Righetto
+April 2007

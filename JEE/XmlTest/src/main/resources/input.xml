@@ -1,0 +1,15 @@
+<contacts>
+    <contact>
+        <nom>Cuisinier</nom>
+        <prenom>Gildas</prenom>
+        <email type="personnelle">hikage@hikage.be</email>
+    </contact>
+    <contact>
+        <nom>Righetto</nom>
+        <prenom>Dominique</prenom>
+        <email type="professionelle">dominique.righetto@logica.com</email>
+        <description><![CDATA[
+                azerty azerty azert
+                ]]></description>
+    </contact>
+</contacts>

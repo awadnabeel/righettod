@@ -1,0 +1,189 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MVC3Exploration
+</name>
+</assembly>
+<members>
+<member name="M:MVC3Exploration.AuthorizeAttributeWithConfiguredRedirect.HandleUnauthorizedRequest(System.Web.Mvc.AuthorizationContext)">
+	<summary>
+ Implementation of the management in case of unauthorized access to a controller/action.
+ 
+ Perform a redirection to the url specified into the attribute property named "nonAllowedRedirectUrl"
+ </summary>
+	<param name="filterContext">Context</param>
+</member><member name="T:MVC3Exploration.AuthorizeAttributeWithConfiguredRedirect">
+	<summary>
+ Custom implementation of a "Authorize" attribute that offer possbility to configure target redirection in case of non allowed access.
+ </summary>
+</member><member name="M:MVC3Exploration.MVC3Exploration.SampleFilterController.HelloSecured">
+	<summary>
+ Sample action that, when is reached, show behavior of differents life cyle filter.
+ 
+ This action require that user will be authenticated and possess role "ADMIN"
+ </summary>
+	<returns>A MVC3 redirection</returns>
+</member><member name="M:MVC3Exploration.MVC3Exploration.SampleFilterController.HelloNotSecured">
+	<summary>
+ Sample action that, when is reached, show behavior of differents life cyle filter.
+ </summary>
+	<returns>A MVC3 redirection</returns>
+</member><member name="M:MVC3Exploration.MVC3Exploration.SampleFilterController.HelloWithError">
+	<summary>
+ Sample action that, when is reached, throw a NullReferenceException that invoke "HandleError" attribute processing
+ </summary>
+	<returns>A MVC3 redirection</returns>
+</member><member name="M:MVC3Exploration.MVC3Exploration.SampleFilterController.HelloSecuredCustomAttr">
+	<summary>
+ Sample action that, when is reached, show behavior of differents life cyle filter.
+ 
+ This action require that user will be authenticated and possess role "ADMIN" and use a custom "Authorize" attribute implementation
+ </summary>
+	<returns>A MVC3 redirection</returns>
+</member><member name="T:MVC3Exploration.MVC3Exploration.SampleFilterController">
+	<summary>
+ Controller exploring behavior of differents MVC3 filters
+ 
+ Test urls :
+ http://localhost:62943/SampleFilter/HelloSecured?login=righettod
+ http://localhost:62943/SampleFilter/HelloNotSecured
+ http://localhost:62943/SampleFilter/HelloWithError
+ http://localhost:62943/SampleFilter/HelloSecuredCustomAttr?login=righettod
+ </summary>
+</member><member name="F:MVC3Exploration.Repositories.StudentRepository.studentsStorage">
+	<summary>
+ Student memory storage
+ </summary>
+</member><member name="M:MVC3Exploration.Repositories.StudentRepository.AddStudent(MVC3Exploration.Models.Student@)">
+	<summary>
+ Method a new student into the storage
+ </summary>
+	<param name="student">Student model instance to add</param>
+</member><member name="M:MVC3Exploration.Repositories.StudentRepository.RetrieveAllStudents">
+	<summary>
+ Method to retrieve the list of all students
+ </summary>
+	<returns>The list of students model instance</returns>
+</member><member name="M:MVC3Exploration.Repositories.StudentRepository.RetrieveStudent(System.String)">
+	<summary>
+ Method to retrieve a students
+ </summary>
+	<returns>The student model instance</returns>
+</member><member name="T:MVC3Exploration.Repositories.StudentRepository">
+	<summary>
+ Class managing all actions on STUDENT model instances
+ </summary>
+</member><member name="M:MVC3Exploration.Models.Validator.PhoneValidator.#ctor(System.String)">
+	<summary>
+ Construstor
+ </summary>
+	<param name="separatorCharacter">Character that separate number group</param>
+</member><member name="M:MVC3Exploration.Models.Validator.PhoneValidator.IsValid(System.Object)">
+	<summary>
+ Validation method
+ </summary>
+	<param name="value">Value to validate</param>
+	<returns>True only if the value is valid</returns>
+</member><member name="T:MVC3Exploration.Models.Validator.PhoneValidator">
+	<summary>
+ Custom property validation attribute for phone number data type
+ </summary>
+</member><member name="T:MVC3Exploration.Models.Student">
+	<summary>
+ Class storing student informations
+ 
+ Attributes on properties are used to perform "Property" level validation
+ </summary>
+</member><member name="M:MVC3Exploration.Controllers.SampleARController.RedirectAR">
+	<summary>
+ Explore the "RedirectResult" action result that issues an HTTP 301 or 302 redirection to a specific URL
+ </summary>
+	<returns>A MVC3 action result</returns>
+</member><member name="M:MVC3Exploration.Controllers.SampleARController.ContentAR">
+	<summary>
+ Explore the "ContentResult" action result that returns raw textual data to the browser, optionally setting a content-type header
+ </summary>
+	<returns>A MVC3 action result</returns>
+</member><member name="M:MVC3Exploration.Controllers.SampleARController.FileAR">
+	<summary>
+ Explore the "FileResult" action result that transmits binary data (such as a file from disk or a byte array in memory) directly to the browser 
+ </summary>
+	<returns>A MVC3 action result</returns>
+</member><member name="M:MVC3Exploration.Controllers.SampleARController.JsonAR">
+	<summary>
+ Explore the "JsonResult" action result that serializes a .NET object in JSON format and sends it as the response 
+ </summary>
+	<returns>A MVC3 action result</returns>
+</member><member name="M:MVC3Exploration.Controllers.SampleARController.HttpUnauthorizedAR">
+	<summary>
+ Explore the "HttpUnauthorizedResult" action result that sets the response HTTP status code to 401 (meaning “not authorized”), 
+ which causes the active authentication mechanism (forms authentication or Windows authentication) 
+ to ask the visitor to log in
+ </summary>
+	<returns>A MVC3 action result</returns>
+</member><member name="M:MVC3Exploration.Controllers.SampleARController.HttpNotFoundAR">
+	<summary>
+ Explore the "HttpNotFoundResult" action result that returns a HTTP 404 – Not found error
+ </summary>
+	<returns>A MVC3 action result</returns>
+</member><member name="M:MVC3Exploration.Controllers.SampleARController.EmptyAR">
+	<summary>
+ Explore the "EmptyResult" action result that does nothing ;o)
+ </summary>
+	<returns>A MVC3 action result</returns>
+</member><member name="M:MVC3Exploration.Controllers.SampleARController.HttpStatusCodeAR">
+	<summary>
+ Explore the "HttpStatusCodeResult" action result that returns a specified HTTP code 
+ </summary>
+	<returns>A MVC3 action result</returns>
+</member><member name="T:MVC3Exploration.Controllers.SampleARController">
+	<summary>
+ Controller exploring behavior of differents "ActionResult" type
+ 
+ Test urls :
+ http://localhost:62943/SampleAR/RedirectAR
+ http://localhost:62943/SampleAR/ContentAR
+ http://localhost:62943/SampleAR/FileAR
+ http://localhost:62943/SampleAR/JsonAR
+ http://localhost:62943/SampleAR/HttpUnauthorizedAR
+ http://localhost:62943/SampleAR/HttpNotFoundAR
+ http://localhost:62943/SampleAR/EmptyAR
+ http://localhost:62943/SampleAR/HttpStatusCodeAR
+ </summary>
+</member><member name="T:MVC3Exploration.Models.StudentAddress">
+	<summary>
+ Class storing student address informations
+ 
+ Attribute on class is used to perform "Model" level validation
+ </summary>
+</member><member name="M:MVC3Exploration.Models.Validator.StudentAddressValidator.IsValid(System.Object)">
+	<summary>
+ Validation method
+ </summary>
+	<param name="value">Value to validate</param>
+	<returns>True only if the value is valid</returns>
+</member><member name="T:MVC3Exploration.Models.Validator.StudentAddressValidator">
+	<summary>
+ Custom model validation attribute for StudentAddress data type
+ </summary>
+</member><member name="M:MVC3Exploration.Controllers.SampleModelBindingController.Index">
+	<summary>
+ Controller home action
+ </summary>
+	<returns>an MVC3 redirection</returns>
+</member><member name="M:MVC3Exploration.Controllers.SampleModelBindingController.Add(MVC3Exploration.Models.Student)">
+	<summary>
+ Controller action to add a student
+ </summary>
+	<param name="student">Student to ass</param>
+	<returns>an MVC3 redirection</returns>
+</member><member name="T:MVC3Exploration.Controllers.SampleModelBindingController">
+	<summary>
+ Controller exploring model object binding between VIEW and CONTROLLER layers
+ 
+ Test url : http://localhost:62943/SampleModelBinding/Index
+ </summary>
+</member>
+</members>
+</doc>

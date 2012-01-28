@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotTail</name>
+    </assembly>
+    <members>
+        <member name="T:DotTail.Form1">
+            <summary>
+            Class that implement events managment
+            </summary>
+        </member>
+        <member name="F:DotTail.Form1.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:DotTail.Form1.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:DotTail.Form1.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:DotTail.Utilities">
+            <summary>
+            Class that contain utilities methods
+            </summary>
+        </member>
+        <member name="F:DotTail.Utilities.applicationPath">
+            <summary>Application path</summary>
+        </member>
+        <member name="F:DotTail.Utilities.HISTORY_FILE">
+            <summary>Attribute to store file history</summary>
+        </member>
+        <member name="F:DotTail.Utilities.USER_SETTINGS_FILE">
+            <summary>Attribute to store user setting</summary>
+        </member>
+        <member name="F:DotTail.Utilities.HISTORY_LIMIT">
+            <summary>Attribute to store history limit</summary>
+        </member>
+        <member name="M:DotTail.Utilities.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="applicationPath">Application path</param>
+        </member>
+        <member name="M:DotTail.Utilities.logError(System.String,System.Exception)">
+            <summary>
+            Method to manage error
+            </summary>
+            <param name="method">Exception source</param>
+            <param name="expt">Exception to log</param>
+        </member>
+        <member name="M:DotTail.Utilities.saveFileHistory(System.Collections.Generic.List{System.String})">
+            <summary>
+            Method to save file history to file
+            </summary>
+            <param name="list">File list</param>
+            <returns>Saving flag status</returns>
+        </member>
+        <member name="M:DotTail.Utilities.loadFileHistory">
+            <summary>
+            Method to load file history from file
+            </summary>
+            <param name="list">File list</param>
+            <returns>History file list</returns>
+        </member>
+        <member name="M:DotTail.Utilities.saveUserSetting(System.String,System.String)">
+            <summary>
+            Method to save user setting to XML file
+            </summary>
+            <param name="elementName">Setting name</param>
+            <param name="elementValue">Setting value</param>
+            <returns>Saving flag status</returns>
+        </member>
+        <member name="M:DotTail.Utilities.getUserSetting(System.String)">
+            <summary>
+            Method to extract user setting
+            </summary>
+            <param name="elementName">Setting name</param>
+            <returns>Setting value</returns>
+        </member>
+        <member name="M:DotTail.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:DotTail.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:DotTail.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:DotTail.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

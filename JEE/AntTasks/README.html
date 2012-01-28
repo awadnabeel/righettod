@@ -1,0 +1,146 @@
+<html>
+<head>
+<title>README : Ant Tasks projects</title>
+<style type="text/css">
+h1 {color:navy;}
+h2 {color:maroon;}
+</style>
+</head>
+<body>
+<basefont face="calibri" />
+<h1>Objective</h1>
+The objective of this project is to provide some utilities
+<a href="http://ant.apache.org/">Apache Ant</a>
+tasks. The Ant API used to implements these tasks is the 1.7.1
+<br />
+The tasks provided are :
+<ul>
+	<li><b>IDGeneratorTask</b> (classname :
+	"com.drighetto.anttasks.IDGeneratorTasks") : Task to generate a unique
+	ID and put it in a existing or new property.</li>
+	<li><b>SetOrUpdatePropertyValueTask</b> (classname :
+	"com.drighetto.anttasks.SetOrUpdatePropertyValueTask") : Task to set or
+	update a property value.</li>
+</ul>
+<br />
+<center>
+<hr width="50%" />
+</center>
+<h1>How to install/declare a task ?</h1>
+To install a task put the corresponding jar file (available in the
+"dist_{TASKNAME}" directory, the jar of a task have the name of the
+task) in a classpath reference and use this declaration :
+<br />
+<textarea rows="7" cols="120" readonly="readonly">
+&lt;taskdef name=&quot;taskName&quot; classname=&quot;taskClassName&quot;&gt;
+	&lt;classpath&gt;
+		...
+	&lt;/classpath&gt;
+&lt;/taskdef&gt;
+</textarea>
+<br />
+<br />
+Example :
+<br />
+<textarea rows="10" cols="120" readonly="readonly">
+&lt;taskdef name=&quot;idgenerator&quot; classname=&quot;com.drighetto.anttasks.IDGeneratorTasks&quot;&gt;
+	&lt;classpath&gt;
+		&lt;fileset dir=&quot;dist_IDGeneratorTask&quot;&gt;
+			&lt;include name=&quot;IDGeneratorTask.jar&quot; /&gt;
+		&lt;/fileset&gt;
+	&lt;/classpath&gt;
+&lt;/taskdef&gt;
+</textarea>
+<br />
+<br />
+<center>
+<hr width="50%" />
+</center>
+<h1>How to use tasks ?</h1>
+<h2>IDGeneratorTask</h2>
+After the task declaration (in this case we have used the name
+"idgenerator" for task name in the declaration) use this syntax :
+<textarea rows="4" cols="120" readonly="readonly">
+&lt;idgenerator propertyname=&quot;testProperty&quot; /&gt;
+</textarea>
+<br />
+The only attribute to fill is named "
+<b>propertyname</b>
+" and it must contains the name of a property on which the value will be
+updated with the generated ID, if the property do not exists it will be
+created in the project.
+<br />
+<br />
+Example :
+<br />
+<textarea rows="21" cols="120" readonly="readonly">
+&lt;!-- Make a test by updating a property value --&gt;
+&lt;echo&gt;============ TEST 1 ============&lt;/echo&gt;
+&lt;property name=&quot;testProperty01&quot; value=&quot;ValueBefore&quot;/&gt;
+&lt;echo&gt;CONTENT BEFORE   : ${testProperty01}&lt;/echo&gt;
+&lt;idgenerator propertyname=&quot;testProperty01&quot;/&gt;
+&lt;echo&gt;CONTENT AFTER    : ${testProperty01}&lt;/echo&gt;
+
+&lt;!-- Make a test by setting a property value --&gt;
+&lt;echo&gt;============ TEST 2 ============&lt;/echo&gt;
+&lt;echo&gt;CONTENT BEFORE   : ${testProperty02}&lt;/echo&gt;
+&lt;idgenerator propertyname=&quot;testProperty02&quot;/&gt;
+&lt;echo&gt;CONTENT AFTER    : ${testProperty02}&lt;/echo&gt;
+
+&lt;!-- Make a test by setting and updating a property value --&gt;
+&lt;echo&gt;============ TEST 3 ============&lt;/echo&gt;
+&lt;echo&gt;CONTENT BEFORE   : ${testProperty03}&lt;/echo&gt;
+&lt;idgenerator propertyname=&quot;testProperty03&quot;/&gt;
+&lt;echo&gt;CONTENT AFTER 1  : ${testProperty03}&lt;/echo&gt;		
+&lt;idgenerator propertyname=&quot;testProperty03&quot;/&gt;
+&lt;echo&gt;CONTENT AFTER 2  : ${testProperty03}&lt;/echo&gt;	
+</textarea>
+<br />
+<br />
+<h2>SetOrUpdatePropertyValueTask</h2>
+After the task declaration (in this case we have used the name
+"updateProperty" for task name in the declaration) use this syntax :
+<textarea rows="4" cols="120" readonly="readonly">
+&lt;updateProperty propertyname=&quot;testProperty01&quot; newvalue=&quot;ValueAfter&quot;/&gt;
+</textarea>
+<br /><br />
+The two attributes to fill are named :
+<ul>
+<li>"<b>propertyname</b>" : It must contains the name of a property on which the value will be setted
+or updated, if the property do not exists it will be created in the project.
+</li>
+<li>"<b>newvalue</b>" : It must contains the value to affect to the property, if it's not filled the value "" (empty string) is setted</li>
+</ul>
+<br />
+Example :
+<br />
+<textarea rows="21" cols="120" readonly="readonly">
+&lt;!-- Make a test by updating a property value --&gt;
+&lt;echo&gt;============ TEST 1 ============&lt;/echo&gt;
+&lt;property name=&quot;testProperty01&quot; value=&quot;ValueBefore&quot;/&gt;
+&lt;echo&gt;CONTENT BEFORE   : ${testProperty01}&lt;/echo&gt;
+&lt;updateProperty propertyname=&quot;testProperty01&quot; newvalue=&quot;ValueAfter&quot;/&gt;
+&lt;echo&gt;CONTENT AFTER    : ${testProperty01}&lt;/echo&gt;
+&lt;!-- Make a test by setting a property value --&gt;
+
+&lt;echo&gt;============ TEST 2 ============&lt;/echo&gt;
+&lt;echo&gt;CONTENT BEFORE   : ${testProperty02}&lt;/echo&gt;
+&lt;updateProperty propertyname=&quot;testProperty02&quot; newvalue=&quot;${ant.version}&quot;/&gt;
+&lt;echo&gt;CONTENT AFTER    : ${testProperty02}&lt;/echo&gt;
+	
+&lt;!-- Make a test by setting and updating a property value --&gt;
+&lt;echo&gt;============ TEST 3 ============&lt;/echo&gt;
+&lt;echo&gt;CONTENT BEFORE   : ${testProperty03}&lt;/echo&gt;
+&lt;updateProperty propertyname=&quot;testProperty03&quot; newvalue=&quot;${ant.version}&quot;/&gt;
+&lt;echo&gt;CONTENT AFTER 1  : ${testProperty03}&lt;/echo&gt;		
+&lt;updateProperty propertyname=&quot;testProperty03&quot; newvalue=&quot;${java.class.version}&quot;/&gt;
+&lt;echo&gt;CONTENT AFTER 2  : ${testProperty03}&lt;/echo&gt;	
+</textarea>
+<br />
+<br />
+<hr width="30%" />
+Feel free to contact me if you encounter any trouble ;o)<br />
+<a href="mailto:dominique[dot]righetto[at]gmail[dot]com">Dominique Righetto</a><br />
+October 2009
+</body>
+</html>

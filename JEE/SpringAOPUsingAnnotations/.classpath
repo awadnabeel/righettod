@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="context"/>
+	<classpathentry kind="lib" path="libAspectJ/aspectjrt.jar"/>
+	<classpathentry kind="lib" path="libAspectJ/aspectjweaver.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="libSpring/commons-logging.jar"/>
+	<classpathentry kind="lib" path="libSpring/spring-aop.jar"/>
+	<classpathentry kind="lib" path="libSpring/spring-beans.jar"/>
+	<classpathentry kind="lib" path="libSpring/spring-context.jar"/>
+	<classpathentry kind="lib" path="libSpring/spring-core.jar"/>
+	<classpathentry kind="lib" path="libSpring/aopalliance.jar"/>
+	<classpathentry kind="lib" path="libSpring/cglib-nodep-2.1_3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

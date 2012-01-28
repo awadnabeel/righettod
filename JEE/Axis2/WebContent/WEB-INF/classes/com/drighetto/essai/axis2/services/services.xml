@@ -1,0 +1,12 @@
+<service name="SimpleService">
+    <description>
+        Simple service
+    </description>
+    <module ref="audit" />
+    <messageReceivers>
+        <messageReceiver
+            mep="http://www.w3.org/2004/08/wsdl/in-out"
+    		class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+    </messageReceivers>
+    <parameter name="ServiceClass">com.drighetto.essai.axis2.services.SimpleService</parameter>
+</service>

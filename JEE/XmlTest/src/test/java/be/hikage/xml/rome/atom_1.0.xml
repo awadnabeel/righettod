@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:dc="http://purl.org/dc/elements/1.1/"
+      xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/">
+    <title>RSS Veille Techno</title>
+    <link rel="alternate" href="http://svn.cyg.be/"/>
+    <author>
+        <name>Gildas Cuisinier</name>
+        <email>hikage@hikage.be</email>
+    </author>
+    <subtitle>RSS d'exemple !</subtitle>
+    <updated>2008-03-24T16:33:19Z</updated>
+    <dc:date>2008-03-24T16:33:19Z</dc:date>
+    <dc:language>fr</dc:language>
+    <entry>
+        <title>Ajout du projet Rome sur le SVN</title>
+        <link rel="alternate" href="https://rome.dev.java.net/"/>
+        <author>
+            <name>Gildas Cuisinier</name>
+            <email>hikage@hikage.be</email>
+        </author>
+        <summary type="text">Ajout d'un projet Rome sur le SVN afin de voir comment creer un RSS</summary>
+    </entry>
+</feed>

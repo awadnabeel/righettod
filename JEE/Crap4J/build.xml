@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  
+	This ANT script show a example of use of CRAP4J audit tool on a sample project                                                              
+-->
+<project name="project" default="project.audit">
+    <description>This ANT script show a example of use of CRAP4J audit tool on a sample project</description>
+	
+	<!-- Build properties -->
+	<property name="crap4j.home" value="${basedir}/Crap4J-Distribution"/>
+	<property name="crap4j.reports" value="${basedir}/Crap4J-Reports"/>
+	<property name="workspace.directory" value="Workspace"/>
+	<property name="sampleproject.home" value="${workspace.directory}/Sample-Project"/>
+	<property name="sampleproject.audit.reports" value="${workspace.directory}/Crap4J-Reports"/>
+	
+	<!-- Set the property defining the CRAP4J distribution home, it's required by the CRAP4J ANT task -->
+	<property name="CRAP4J_HOME" value="${crap4j.home}"/>
+
+
+	<!-- This target prepare the workspace -->
+    <target name="prepare.workspace">
+    	<echo>Step 1  : Workspace preparation</echo>
+    	<delete dir="${workspace.directory}" />
+    	<mkdir dir="${sampleproject.home}" />
+    	<mkdir dir="${sampleproject.audit.reports}" />
+        <unzip dest="${sampleproject.home}" src="SampleProject.zip" />
+    </target>
+
+	<!-- This target use CRAP4J to audit the sample project -->
+    <target name="project.audit" depends="prepare.workspace">
+    	<echo>Step 2  : Project audit</echo>
+    	<echo>Step 2a : Create CRAP4J Ant task</echo>
+    	<taskdef name="crap4j" classname="org.crap4j.anttask.Crap4jAntTask" >
+    		<classpath>
+    			<fileset dir="${CRAP4J_HOME}/lib">
+    				<include name="**/*.jar" />
+    			</fileset>
+    		</classpath>
+    	</taskdef>
+    	<echo>Step 2b : Compile the sample project</echo>
+    	<javac destdir="${sampleproject.home}/war/WEB-INF/classes" 
+    		   srcdir="${sampleproject.home}/Service:${sampleproject.home}/Persistence:${sampleproject.home}/Transversal"
+    		   debug="false" verbose="false">
+    		<classpath>
+				<fileset dir="${sampleproject.home}/war/WEB-INF/lib">
+					<include name="*.jar" />
+				</fileset>   				
+    		</classpath>    		   
+    	</javac>
+    	<echo>Step 2c : Run the audit task on sample project</echo>
+		 <crap4j projectdir="${sampleproject.home}" outputDir="${sampleproject.audit.reports}" dontTest="false" debug="false" downloadaverages="true">
+			<!-- Set project classes directory -->
+			<classes>
+				<pathElement location="${sampleproject.home}/war/WEB-INF/classes" />
+			</classes>
+		 	<!-- Set project sources directories -->
+			<srces>
+				<pathElement location="${sampleproject.home}/Service" />
+				<pathElement location="${sampleproject.home}/Persistence" />
+				<pathElement location="${sampleproject.home}/Transversal" />
+			</srces>
+		 	<!-- Set project unit test classes directory -->
+			<testclasses>
+				<pathElement location="${sampleproject.home}/Test" />
+			</testclasses>
+		 	<!-- Set project third party libraries -->
+			<libclasspath>
+				<fileset dir="${sampleproject.home}/war/WEB-INF/lib">
+					<include name="*.jar" />
+				</fileset>
+			</libclasspath>
+		</crap4j>  
+    	<echo>Open file "${basedir}/${sampleproject.audit.reports}/index.html" into a browser to see CRAP4J reports</echo>
+    </target>
+
+</project>
+

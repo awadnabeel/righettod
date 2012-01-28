@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project type="relational">
+   <name>SpringToplinkWithOptimisticLocking</name>
+   <product-version>10.1.3.1.0</product-version>
+   <schema-version>6.0</schema-version>
+   <class-repository>
+      <user-type-names>
+         <name>eu.curia.suivi2.model.Developer</name>
+         <name>eu.curia.suivi2.model.DeveloperLevel</name>
+      </user-type-names>
+   </class-repository>
+   <descriptor-names>
+      <descriptor-name>eu.curia.suivi2.model.Developer</descriptor-name>
+      <descriptor-name>eu.curia.suivi2.model.DeveloperLevel</descriptor-name>
+   </descriptor-names>
+   <defaults-policy type="relational">
+      <use-method-accessing>false</use-method-accessing>
+      <caching-policy>
+         <cache-expiry/>
+      </caching-policy>
+      <cache-all-statements>false</cache-all-statements>
+      <bind-all-parameters>false</bind-all-parameters>
+   </defaults-policy>
+   <ejb-policy>
+      <ejb-persistence-type>No EJB</ejb-persistence-type>
+   </ejb-policy>
+   <deployment-xml-file>SpringToplinkWithOptimisticLocking.xml</deployment-xml-file>
+   <model-source>
+      <directory>beans</directory>
+   </model-source>
+   <table-repository>
+      <platform-name>Oracle10g</platform-name>
+      <login-infos>
+         <login-info>
+            <name>Local XE DB</name>
+            <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+            <url>jdbc:oracle:thin:@localhost:1521:xe</url>
+            <user-name>MyTestUser</user-name>
+            <password>7747F4E13622D35AA291A310B2A776B42AD97E15439FAC0E</password>
+            <save-password>true</save-password>
+         </login-info>
+      </login-infos>
+      <deployment-login-spec-handle>
+         <login-spec-name>Local XE DB</login-spec-name>
+      </deployment-login-spec-handle>
+      <development-login-spec-handle>
+         <login-spec-name>Local XE DB</login-spec-name>
+      </development-login-spec-handle>
+      <table-names>
+         <name>DEVELOPER</name>
+         <name>DEVELOPER_LEVEL</name>
+      </table-names>
+   </table-repository>
+   <sequencing>
+      <preallocation-size>50</preallocation-size>
+   </sequencing>
+   <table-generation>
+      <default-primary-key-name>ID</default-primary-key-name>
+      <primary-key-search-pattern>*ID</primary-key-search-pattern>
+   </table-generation>
+</project>

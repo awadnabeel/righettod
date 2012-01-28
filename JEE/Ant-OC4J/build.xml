@@ -1,0 +1,113 @@
+<!--
+	======================================================= 
+	Script showing OC4J access operations through Ant
+	
+	Author : D. Righetto
+	August 2007
+	=======================================================
+	
+	Note :
+	- Start and stop instance tasks can only be used with a true Oracle Application Server (OAS) which can host several instances
+	and not the OC4J simple development server that host only a single instance.
+	- Start/Stop operation on OC4J server are performed using command line...	
+	- With OC4J : In case of undeployment oracle server can't delete all files because they  lock them, 
+	the solution is to undeploy application, stop the OC4J server, delete old application files and finally start the OC4J server...
+-->
+<project default="main" basedir="."
+	xmlns:oracle="antlib:oracle">
+
+	<!-- Task XML definition -->
+	<import file="ant-oracle.xml" />	
+	
+	<!-- Script properties -->
+		<!-- Test WAR file -->	
+	<property name="warFile" value="testWar/AdobeFlex2.war" />	
+		<!-- Application name -->
+	<property name="app.name" value="AdobeFlex2" />
+		<!-- Log directory -->	
+	<property name="log.dir" value="logs" />
+
+	
+	<!-- Main task -->
+	<target name="main">
+	  <antcall target="oc4j.deploy" />
+	  <antcall target="oc4j.stop.app" />
+	  <antcall target="oc4j.undeploy" />
+	</target>	
+	
+	
+
+	<!-- Start instance task 
+	- Can only be used with a true Oracle Application Server (OAS) which can host several instances
+	and not the OC4J simple development server that host only a single instance.
+	- Start/Stop operation on OC4J server are performed using command line...
+	-->	
+	<target name="oc4j.start.instance">
+		<echo message="-----> Start instance ${deployer.uri}" />
+			<oracle:restartServer
+			deployerUri="${deployer.uri}"
+			userid="${oc4j.admin.user}"
+			password="${oc4j.admin.password}"/>
+		<echo message="-----> Instance ${deployer.uri} started !" />
+	</target>	
+	
+	<!-- Stop instance task
+	- Can only be used with a true Oracle Application Server (OAS) which can host several instances
+	and not the OC4J simple development server that host only a single instance.
+	- Start/Stop operation on OC4J server are performed using command line...
+	-->		
+	<target name="oc4j.stop.instance">
+		<echo message="-----> Stop instance ${deployer.uri}" />
+			<oracle:shutdownServer
+			deployerUri="${deployer.uri}"
+			userid="${oc4j.admin.user}"
+			password="${oc4j.admin.password}"/>
+		<echo message="-----> Instance ${deployer.uri} stopped !" />
+	</target>		
+	
+	<!-- Start application task -->
+	<target name="oc4j.start.app">
+		<echo message="-----> Start application ${app.name}" />
+			<oracle:start
+			deployerUri="${deployer.uri}"
+			userid="${oc4j.admin.user}"
+			password="${oc4j.admin.password}"	
+			deploymentName="${app.name}"/>
+		<echo message="-----> Application ${app.name} started !" />
+	</target>
+	
+	<!-- Stop application task -->
+	<target name="oc4j.stop.app">
+		<echo message="-----> Stop application ${app.name}" />
+			<oracle:stop
+			deployerUri="${deployer.uri}"
+			userid="${oc4j.admin.user}"
+			password="${oc4j.admin.password}"	
+			deploymentName="${app.name}"/>
+		<echo message="-----> Application ${app.name} stopped !" />
+	</target>	
+	
+	<!-- Deploy task -->
+	<target name="oc4j.deploy">
+		<echo message="-----> Deploying the application ${app.name}" />
+		<oracle:deploy deployerUri="${deployer.uri}"
+			userid="${oc4j.admin.user}" password="${oc4j.admin.password}"
+			file="${warFile}" deploymentName="${app.name}"
+			bindAllWebApps="default-web-site"
+			logfile="${log.dir}/oc4j-deploy.log" />
+		<echo message="-----> Application ${app.name} deployed !" />
+	</target>
+	
+	<!-- Undeploy task -->
+	<target name="oc4j.undeploy">
+		<echo message="-----> Undeploying the application ${app.name}" />
+		<oracle:undeploy deployerUri="${deployer.uri}"
+			userid="${oc4j.admin.user}" password="${oc4j.admin.password}"
+			deploymentName="${app.name}"
+			logfile="${log.dir}/oc4j-undeploy.log" />
+		<echo message="-----> Application ${app.name} undeployed !" />
+	</target>	
+
+
+
+</project>

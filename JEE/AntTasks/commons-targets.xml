@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Script containing commons Ant targets used to build or test tasks -->
+<project name="Commons">
+	<!-- Task to package the task -->
+	<target name="task.package">
+		<delete dir="${dist}" />
+		<mkdir dir="${dist}" />
+		<javac srcdir="${src}" destdir="${dist}">
+			<include name="**/*${task.name}*.java" />
+		</javac>
+		<jar destfile="${task.name}.jar" basedir="${dist}">
+			<manifest>
+				<attribute name="Built-By" value="Dominique Righetto (dominique.righetto@gmail.com)" />
+				<attribute name="Built-Date" value="${DSTAMP}" />
+				<attribute name="Project-Url" value="http://code.google.com/p/drighetto-it-stay" />
+				<attribute name="Compilation-JDK-Version" value="${java.version}" />
+			</manifest>
+		</jar>
+		<delete dir="${dist}" />
+		<mkdir dir="${dist}" />
+		<move file="${task.name}.jar" todir="${dist}" />
+	</target>
+</project>

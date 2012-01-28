@@ -1,0 +1,12 @@
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\MVC3Exploration\MVC3Exploration\obj\Debug\ResolveAssemblyReference.cache
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\MVC3Exploration\MVC3Exploration\obj\Debug\MVC3Exploration.Resources.resources
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\MVC3Exploration\MVC3Exploration\obj\Debug\GenerateResource.read.1.tlog
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\MVC3Exploration\MVC3Exploration\obj\Debug\GenerateResource.write.1.tlog
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\MVC3Exploration\MVC3Exploration\bin\MVC3Exploration.dll
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\MVC3Exploration\MVC3Exploration\bin\MVC3Exploration.pdb
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\MVC3Exploration\MVC3Exploration\bin\MVC3Exploration.xml
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\MVC3Exploration\MVC3Exploration\bin\EntityFramework.dll
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\MVC3Exploration\MVC3Exploration\bin\EntityFramework.xml
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\MVC3Exploration\MVC3Exploration\obj\Debug\MVC3Exploration.dll
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\MVC3Exploration\MVC3Exploration\obj\Debug\MVC3Exploration.xml
+D:\IT_RESEARCH\DOTNET_HOME\VisualStudioProjects\Projects\MVC3Exploration\MVC3Exploration\obj\Debug\MVC3Exploration.pdb

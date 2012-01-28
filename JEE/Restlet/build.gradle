@@ -1,0 +1,49 @@
+/* ********************** */
+/* Gradle Build Script    */
+/* ********************** */
+
+//Use WAR plugins in order to have base tasks for Java Web project type
+apply plugin: 'war'
+
+
+//Define dependencies (in our cases all third party libraries are stored on a local directory)
+dependencies {
+	compile fileTree(dir: 'WebContent/WEB-INF/lib', include: '*.jar')
+	runtime fileTree(dir: 'WebContent/WEB-INF/lib', include: '*.jar')
+}
+
+
+//Define Java sources elements location
+sourceSets {
+	//Main sources and files
+	main {
+		java {
+			srcDir 'src'
+		}
+		resources {
+			srcDir 'src'
+		}
+	}
+	//Test sources and files
+	test {
+		java {
+			srcDir 'test'
+		}
+		resources {
+			srcDir 'test'
+		}
+	}
+}
+
+
+//Configure elements specific to 'war' task
+war {
+	version = '1.0'
+	baseName = 'MyArtefacts'
+	destinationDir = new File(project.buildDir, 'dist')
+	webAppDirName = 'WebContent'
+	webXml = file('WebContent/WEB-INF/web.xml')
+	manifest {
+		attributes 'Implementation-Title': 'Reslet Sample', 'Implementation-Version': version
+	}
+}

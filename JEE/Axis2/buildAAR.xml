@@ -1,0 +1,45 @@
+<!-- 
+ Build to create Axis ARchive files (AAR) 
+ 
+ Note : Formatting of "echo" message are important and must be followed in new service build task added !
+
+ Author : D. Righetto 
+ Date   : March 2007 
+-->
+<project default="default" basedir=".">
+	
+	<description>Build to create Axis ARchive files (AAR) for services</description>
+	
+	<!-- Project global properties -->
+	<property name="web.content.dir" value="WebContent" />
+	<property name="dist" value="tmp" />
+	
+	  <!-- Target entry point-->
+	  <target name="default">
+	 	 	<echo message="" file="${web.content.dir}/WEB-INF/services/services.list" append="false"/>
+	  	    <delete dir="${dist}"/>
+	  	    <!--Call ARR targets builders-->
+	  	    <antcall target="SimpleServiceAAR"/>
+	  </target>	
+
+	<!-- Target to build AAR for service : "SimpleService"-->
+	 <target name="SimpleServiceAAR" >	 	
+		<!-- Target specific properties -->
+		<property name="package.tree" value="com/drighetto/essai/axis2/services" />		
+		<property name="service.xml.cfg.file.path" value="${web.content.dir}/WEB-INF/classes/${package.tree}" />
+		<property name="service.name" value="SimpleService" />
+	 	
+	  	 <mkdir dir="${dist}/${package.tree}"/>
+	     <copy todir="${dist}/${package.tree}">
+		   <fileset dir="${web.content.dir}/WEB-INF/classes/${package.tree}" includes="**/*.class"/>              
+	     </copy>
+	 	 <mkdir dir="${dist}/META-INF"/>	
+	    <copy todir="${dist}/META-INF">
+		   <fileset dir="${service.xml.cfg.file.path}" includes="services.xml"/>              
+	    </copy>
+	    <jar destfile="${web.content.dir}/WEB-INF/services/${service.name}.aar" basedir="${dist}" compress="false" />
+	 	<echo file="${web.content.dir}/WEB-INF/services/services.list" append="true">${service.name}.aar	 		
+	 	</echo>
+		<delete dir="${dist}"/>
+	  </target> 
+</project>

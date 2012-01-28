@@ -1,0 +1,32 @@
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+     <title>Tunnel Howald Buddy</title>
+
+	 <!-- Ext Touch CSS -->
+	 <link rel="stylesheet" href="resources/css/ext-touch.css" type="text/css">
+
+	 <!-- Application CSS -->
+	 <link rel="stylesheet" href="theme.css" type="text/css">
+
+	 <!-- Google Maps JS -->
+	 <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"> </script>  -->
+
+	 <!-- Ext Touch JS -->
+	 <script type="text/javascript" src="ext-touch-debug.js"> </script>
+
+	 <!-- Application JS -->
+	 <script type="text/javascript" src="index.js"> </script>
+ </head>
+ <body>
+ <textarea id="ride" class="x-hidden-display">
+    <tpl for=".">
+        <h1>{DisplayName}</h1>
+        <h2 class="{Status}"><img src="resources/img/current.png" border="0" /> {Current}</h2>
+        <h2 class="{Status}"><img src="resources/img/average.png" border="0" /> {Average}</h2>
+        <h2 class="{Status}"><img src="resources/img/maximum.png" border="0" /> {Maximum}</h2>
+    </tpl>
+</textarea>
+ </body>
+ </html>

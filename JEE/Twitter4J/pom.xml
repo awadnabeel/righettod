@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.drighetto.twitter4j</groupId>
+  <artifactId>Twitter4J</artifactId>
+  <name>Twitter4J</name>
+  <version>0.0.1-SNAPSHOT</version>
+  <description>This project have to objective to show samples of use of the &quot;Twitter4J&quot; library (Twitter client API)</description>
+  <url>http://yusuke.homeip.net/twitter4j/en/index.html</url>
+  <build>
+  	<plugins>
+  		<plugin>
+  			<artifactId>maven-compiler-plugin</artifactId>
+                <inherited>true</inherited>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+  		</plugin>
+  	</plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>net.homeip.yusuke</groupId>
+      <artifactId>twitter4j</artifactId>
+      <version>2.0.8</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+    	<groupId>junit</groupId>
+    	<artifactId>junit</artifactId>
+    	<version>4.5</version>
+    </dependency>
+  </dependencies>
+</project>

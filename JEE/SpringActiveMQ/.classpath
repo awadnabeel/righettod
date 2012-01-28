@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/commons-collections.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="lib/spring.jar"/>
+	<classpathentry kind="lib" path="lib/xbean-spring-2.8.jar"/>
+	<classpathentry kind="lib" path="lib/activemq-core-4.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/JEE_HOME/GlassFishV2/lib/javaee.jar"/>
+	<classpathentry kind="lib" path="lib/backport-util-concurrent-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-pool.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

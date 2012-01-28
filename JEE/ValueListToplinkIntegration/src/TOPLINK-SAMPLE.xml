@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toplink:object-persistence version="Oracle TopLink - 10g Release 3 (10.1.3.1.0) (Build 061004)" xmlns:opm="http://xmlns.oracle.com/ias/xsds/opm" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:toplink="http://xmlns.oracle.com/ias/xsds/toplink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <opm:name>TOPLINK-SAMPLE</opm:name>
+   <opm:class-mapping-descriptors>
+      <opm:class-mapping-descriptor xsi:type="toplink:relational-class-mapping-descriptor">
+         <opm:class>com.drighetto.essai.toplink.pojo.Developer</opm:class>
+         <opm:alias>Developer</opm:alias>
+         <opm:primary-key>
+            <opm:field table="DEVELOPER" name="ID_DEVELOPER" xsi:type="opm:column"/>
+         </opm:primary-key>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy">
+            <opm:queries>
+               <opm:query name="findAllDevelopers" xsi:type="toplink:read-all-query">
+                  <opm:arguments>
+                     <opm:argument name="devName">
+                        <opm:type>java.lang.String</opm:type>
+                     </opm:argument>
+                  </opm:arguments>
+                  <toplink:call xsi:type="toplink:sql-call">
+                     <toplink:sql>SELECT * FROM DEVELOPER WHERE DEVELOPER.NAME_DEVELOPER = #devName</toplink:sql>
+                  </toplink:call>
+                  <toplink:cache-query-results>true</toplink:cache-query-results>
+                  <toplink:query-result-cache-policy>
+                     <toplink:invalidation-policy xsi:type="toplink:no-expiry-cache-invalidation-policy"/>
+                  </toplink:query-result-cache-policy>
+                  <toplink:reference-class>com.drighetto.essai.toplink.pojo.Developer</toplink:reference-class>
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>java.util.Vector</toplink:collection-type>
+                  </toplink:container>
+               </opm:query>
+               <opm:query name="findDevelopers" xsi:type="toplink:read-object-query">
+                  <opm:arguments>
+                     <opm:argument name="devName">
+                        <opm:type>java.lang.String</opm:type>
+                     </opm:argument>
+                     <opm:argument name="idLevel">
+                        <opm:type>java.lang.String</opm:type>
+                     </opm:argument>
+                  </opm:arguments>
+                  <toplink:call xsi:type="toplink:sql-call">
+                     <toplink:sql>SELECT * FROM DEVELOPER WHERE (DEVELOPER.NAME_DEVELOPER = #devName  ) AND (DEVELOPER.ID_DEVELOPER_LEVEL = #idLevel)</toplink:sql>
+                  </toplink:call>
+                  <toplink:cache-query-results>true</toplink:cache-query-results>
+                  <toplink:query-result-cache-policy>
+                     <toplink:invalidation-policy xsi:type="toplink:no-expiry-cache-invalidation-policy"/>
+                  </toplink:query-result-cache-policy>
+                  <toplink:reference-class>com.drighetto.essai.toplink.pojo.Developer</toplink:reference-class>
+               </opm:query>
+            </opm:queries>
+         </opm:querying>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>idDeveloper</opm:attribute-name>
+               <opm:field table="DEVELOPER" name="ID_DEVELOPER" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:one-to-one-mapping">
+               <opm:attribute-name>idDeveloperLevel</opm:attribute-name>
+               <opm:reference-class>com.drighetto.essai.toplink.pojo.DeveloperLevel</opm:reference-class>
+               <opm:foreign-key>
+                  <opm:field-reference>
+                     <opm:source-field table="DEVELOPER" name="ID_DEVELOPER_LEVEL" xsi:type="opm:column"/>
+                     <opm:target-field table="DEVELOPER_LEVEL" name="ID_LEVEL" xsi:type="opm:column"/>
+                  </opm:field-reference>
+               </opm:foreign-key>
+               <opm:foreign-key-fields>
+                  <opm:field table="DEVELOPER" name="ID_DEVELOPER_LEVEL" xsi:type="opm:column"/>
+               </opm:foreign-key-fields>
+               <toplink:indirection xsi:type="toplink:value-holder-indirection-policy"/>
+               <toplink:selection-query xsi:type="toplink:read-object-query"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-map-mapping">
+               <opm:attribute-name>levelName</opm:attribute-name>
+               <opm:get-method>getLevelName</opm:get-method>
+               <opm:set-method>setLevelName</opm:set-method>
+               <toplink:container xsi:type="toplink:direct-map-container-policy">
+                  <toplink:collection-type>java.util.HashMap</toplink:collection-type>
+               </toplink:container>
+               <toplink:indirection xsi:type="toplink:value-holder-indirection-policy"/>
+               <toplink:selection-query xsi:type="toplink:data-read-query">
+                  <toplink:maintain-cache>false</toplink:maintain-cache>
+                  <toplink:container xsi:type="toplink:direct-map-container-policy">
+                     <toplink:collection-type>java.util.HashMap</toplink:collection-type>
+                  </toplink:container>
+               </toplink:selection-query>
+               <toplink:reference-table>DEVELOPER_LEVEL</toplink:reference-table>
+               <toplink:direct-field table="DEVELOPER_LEVEL" name="LABEL_LEVEL" xsi:type="opm:column"/>
+               <toplink:reference-foreign-key>
+                  <opm:field-reference>
+                     <opm:source-field table="DEVELOPER_LEVEL" name="ID_LEVEL" xsi:type="opm:column"/>
+                     <opm:target-field table="DEVELOPER" name="ID_DEVELOPER" xsi:type="opm:column"/>
+                  </opm:field-reference>
+               </toplink:reference-foreign-key>
+               <toplink:direct-key-field table="DEVELOPER_LEVEL" name="ID_LEVEL" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>nameDeveloper</opm:attribute-name>
+               <opm:field table="DEVELOPER" name="NAME_DEVELOPER" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>independent</toplink:descriptor-type>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+         <toplink:change-policy xsi:type="toplink:deferred-detection-change-policy"/>
+         <toplink:tables>
+            <toplink:table name="DEVELOPER"/>
+         </toplink:tables>
+      </opm:class-mapping-descriptor>
+      <opm:class-mapping-descriptor xsi:type="toplink:relational-class-mapping-descriptor">
+         <opm:class>com.drighetto.essai.toplink.pojo.DeveloperLevel</opm:class>
+         <opm:alias>DeveloperLevel</opm:alias>
+         <opm:primary-key>
+            <opm:field table="DEVELOPER_LEVEL" name="ID_LEVEL" xsi:type="opm:column"/>
+         </opm:primary-key>
+         <opm:events xsi:type="toplink:event-policy"/>
+         <opm:querying xsi:type="toplink:query-policy"/>
+         <opm:attribute-mappings>
+            <opm:attribute-mapping xsi:type="toplink:one-to-many-mapping">
+               <opm:attribute-name>developerCollection</opm:attribute-name>
+               <opm:get-method>getDeveloperCollection</opm:get-method>
+               <opm:set-method>setDeveloperCollection</opm:set-method>
+               <opm:reference-class>com.drighetto.essai.toplink.pojo.Developer</opm:reference-class>
+               <opm:target-foreign-key>
+                  <opm:field-reference>
+                     <opm:source-field table="DEVELOPER" name="ID_DEVELOPER_LEVEL" xsi:type="opm:column"/>
+                     <opm:target-field table="DEVELOPER_LEVEL" name="ID_LEVEL" xsi:type="opm:column"/>
+                  </opm:field-reference>
+               </opm:target-foreign-key>
+               <toplink:container xsi:type="toplink:list-container-policy">
+                  <toplink:collection-type>oracle.toplink.indirection.IndirectList</toplink:collection-type>
+               </toplink:container>
+               <toplink:indirection xsi:type="toplink:transparent-collection-indirection-policy"/>
+               <toplink:selection-query xsi:type="toplink:read-all-query">
+                  <toplink:container xsi:type="toplink:list-container-policy">
+                     <toplink:collection-type>oracle.toplink.indirection.IndirectList</toplink:collection-type>
+                  </toplink:container>
+               </toplink:selection-query>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>idLevel</opm:attribute-name>
+               <opm:field table="DEVELOPER_LEVEL" name="ID_LEVEL" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+            <opm:attribute-mapping xsi:type="toplink:direct-mapping">
+               <opm:attribute-name>labelLevel</opm:attribute-name>
+               <opm:field table="DEVELOPER_LEVEL" name="LABEL_LEVEL" xsi:type="opm:column"/>
+            </opm:attribute-mapping>
+         </opm:attribute-mappings>
+         <toplink:descriptor-type>independent</toplink:descriptor-type>
+         <toplink:instantiation/>
+         <toplink:copying xsi:type="toplink:instantiation-copy-policy"/>
+         <toplink:change-policy xsi:type="toplink:deferred-detection-change-policy"/>
+         <toplink:tables>
+            <toplink:table name="DEVELOPER_LEVEL"/>
+         </toplink:tables>
+      </opm:class-mapping-descriptor>
+   </opm:class-mapping-descriptors>
+   <toplink:login xsi:type="toplink:database-login">
+      <toplink:platform-class>oracle.toplink.platform.database.oracle.Oracle10Platform</toplink:platform-class>
+      <toplink:bind-all-parameters>true</toplink:bind-all-parameters>
+      <toplink:cache-all-statements>true</toplink:cache-all-statements>
+   </toplink:login>
+</toplink:object-persistence>
