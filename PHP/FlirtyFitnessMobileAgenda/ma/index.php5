@@ -193,6 +193,12 @@ for($i = 1 ; $i <= 7 ; $i++ ){
 <script type="text/javascript">
 	//Determine opening day for planning button link on welcome page
 	var cClientSideDay = new Date().getDay(); 
+	//Manage 'Sunday' day case because 
+	//we start from 1 (Monday) to 7 (Sunday) and JS Date function 
+	//start from 0 (Sunday) to 6 (Saturday)
+	if(Number(cClientSideDay) == 0){
+		cClientSideDay = 7;
+	}	
 	$("#planningAccessLink").attr("href", "#P" + (cClientSideDay));
 </script>
 </body>
