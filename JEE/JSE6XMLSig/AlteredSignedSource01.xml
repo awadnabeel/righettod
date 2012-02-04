@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+	<SignedInfo>
+		<CanonicalizationMethod
+			Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments" />
+		<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+		<Reference URI="#invoice">
+			<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+			<DigestValue>8+fNTwbChy8wPX0bPear0rXI5wX80ZQvm9jrutFP93o=
+			</DigestValue>
+		</Reference>
+	</SignedInfo>
+	<SignatureValue>bbta7d1kU+xzl3tBH8IYzNjvpq0iKcWIXggfAYeJOAjZwcTvTgr8PQ==
+	</SignatureValue>
+	<KeyInfo>
+		<KeyValue>
+			<DSAKeyValue>
+				<P>/KaCzo4Syrom78z3EQ5SbbB4sF7ey80etKII864WF64B81uRpH5t9jQTxeEu0ImbzRMqzVDZkVG9
+					xD7nN1kuFw==
+				</P>
+				<Q>li7dzDacuo67Jg7mtqEm2TRuOMU=</Q>
+				<G>Z4Rxsnqc9E7pGknFFH2xqaryRPBaQ01khpMdLRQnG541Awtx/XPaF5Bpsy4pNWMOHCBiNU0Nogps
+					QW5QvnlMpA==
+				</G>
+				<Y>hueUllgX31jyO4ICF5Vy+vgcmQbolGczIDvjrXBPNtKP/jCGXavII8f62Qvta/c5lAHgcMFzX8X4
+					BGkcEz1TfA==
+				</Y>
+			</DSAKeyValue>
+		</KeyValue>
+	</KeyInfo>
+	<Object Id="invoice">
+		<invoice XMLns="http://www.company.com/accounting" xmlns="">
+			<items>
+				<item>
+					<desc>Applied Cryptography</desc>
+					<type>book</type>
+					<unitprice>44.50</unitprice>
+					<quantity>1</quantity>
+				</item>
+			</items>
+			<creditcard>
+				<number>123456789</number>
+				<expiry>10/20/2009</expiry>
+				<lastname>John</lastname>
+				<firstname>Smith Altered ;o)</firstname>
+			</creditcard>
+		</invoice>
+	</Object>
+</Signature>
