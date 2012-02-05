@@ -4,13 +4,13 @@
 		<CanonicalizationMethod
 			Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments" />
 		<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
-		<Reference URI="#invoice">
+		<Reference URI="http://www.actstudent.org/plan/pdf/sample.pdf">
 			<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
-			<DigestValue>8+fNTwbChy8wPX0bPear0rXI5wX80ZQvm9jrutFP93o=
+			<DigestValue>e7Is61T9h/6byl0ql+bbWTdDhu23VDG81suXhyZS+w0=
 			</DigestValue>
 		</Reference>
 	</SignedInfo>
-	<SignatureValue>KJBuIA5sc1qKUfQjPFp82kBvtxICInkvn3CYvxf10FTB3OT3XLrVEw==
+	<SignatureValue>ipanRxypv3uvpTCyjUtypkVged4YEH7paI5/Aeidr0xsdD4rWuVl7w==
 	</SignatureValue>
 	<KeyInfo>
 		<KeyValue>
@@ -28,22 +28,4 @@
 			</DSAKeyValue>
 		</KeyValue>
 	</KeyInfo>
-	<Object Id="invoice">
-		<invoice XMLns="http://www.company.com/accounting" xmlns="">
-			<items>
-				<item>
-					<desc>Applied Cryptography</desc>
-					<type>book</type>
-					<unitprice>44.50</unitprice>
-					<quantity>1</quantity>
-				</item>
-			</items>
-			<creditcard>
-				<number>123456789</number>
-				<expiry>10/20/2009</expiry>
-				<lastname>John</lastname>
-				<firstname>Smith</firstname>
-			</creditcard>
-		</invoice>
-	</Object>
 </Signature>

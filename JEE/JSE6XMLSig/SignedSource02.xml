@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PurchaseOrder>
+	<Item number="130046593231">
+		<Description>Video Game</Description>
+		<Price>10.29</Price>
+	</Item>
+	<Buyer id="8492340">
+		<Name>My Name</Name>
+		<Address>
+			<Street>One Network Drive</Street>
+			<Town>Burlington</Town>
+			<State>MA</State>
+			<Country>United States</Country>
+			<PostalCode>01803</PostalCode>
+		</Address>
+	</Buyer>
+	<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+		<SignedInfo>
+			<CanonicalizationMethod
+				Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+			<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+			<Reference URI="">
+				<Transforms>
+					<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+				</Transforms>
+				<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+				<DigestValue>g310dlCS8iUtS2DzImsAgqeivly9NIAOD2uvQffuR3A=
+				</DigestValue>
+			</Reference>
+		</SignedInfo>
+		<SignatureValue>dsO3a5eKtwAS8uaSN0zXpVDWSpoUlWIje/gnXfX1O9XF1jV3qLCP1A==
+		</SignatureValue>
+		<KeyInfo>
+			<KeyValue>
+				<DSAKeyValue>
+					<P>/KaCzo4Syrom78z3EQ5SbbB4sF7ey80etKII864WF64B81uRpH5t9jQTxeEu0ImbzRMqzVDZkVG9
+						xD7nN1kuFw==
+					</P>
+					<Q>li7dzDacuo67Jg7mtqEm2TRuOMU=</Q>
+					<G>Z4Rxsnqc9E7pGknFFH2xqaryRPBaQ01khpMdLRQnG541Awtx/XPaF5Bpsy4pNWMOHCBiNU0Nogps
+						QW5QvnlMpA==
+					</G>
+					<Y>hueUllgX31jyO4ICF5Vy+vgcmQbolGczIDvjrXBPNtKP/jCGXavII8f62Qvta/c5lAHgcMFzX8X4
+						BGkcEz1TfA==
+					</Y>
+				</DSAKeyValue>
+			</KeyValue>
+		</KeyInfo>
+	</Signature>
+</PurchaseOrder>
