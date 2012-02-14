@@ -1,5 +1,5 @@
 <NotepadPlus>
-    <UserLang name="W3AF Script" ext="w3af">
+    <UserLang name="W3AF" ext="w3af">
         <Settings>
             <Global caseIgnored="yes" />
             <TreatAsSymbol comment="no" commentLine="no" />
