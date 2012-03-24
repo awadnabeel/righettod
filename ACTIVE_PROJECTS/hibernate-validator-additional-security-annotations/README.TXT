@@ -3,8 +3,9 @@
 **********
 
 ** Description
-This project have to objective to provide an string content checking constraint annotation using the 
-JSR303 RI Hibernate Validation (http://www.hibernate.org/subprojects/validator.html).
+This project have to objective to provide content checking constraints annotations set 
+focused on security using the JSR303 RI Hibernate Validation. 
+(http://www.hibernate.org/subprojects/validator.html).
 
 This JSR can be used to perform security check on input user data and then it's for this 
 reason that i decided to use it as framework.

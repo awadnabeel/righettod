@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>StringCheckInputAnnotations</name>
+	<name>hibernate-validator-additional-security-annotations</name>
 	<comment></comment>
 	<projects>
 	</projects>

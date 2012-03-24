@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.righettod.security.annotation</groupId>
-	<artifactId>StringCheckInputAnnotations</artifactId>
+	<groupId>hibernate-validator-additional-security-annotations</groupId>
+	<artifactId>hibernate-validator-additional-security-annotations</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>StringCheckInputAnnotations</name>
-	<description>This project have to objective to provide an string content checking constraint annotation using the JSR303 RI Hibernate Validation</description>
+	<name>hibernate-validator-additional-security-annotations</name>
+	<description>This project have to objective to provide content checking constraints annotations set focused on security using the JSR303 RI Hibernate Validation.</description>
 	<dependencies>
 		<dependency>
 			<groupId>org.hibernate</groupId>
