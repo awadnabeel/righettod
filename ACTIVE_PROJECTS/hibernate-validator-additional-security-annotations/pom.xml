@@ -51,6 +51,7 @@
 				<executions>
 					<execution>
 						<id>attach-sources</id>
+						<phase>package</phase>
 						<goals>
 							<goal>jar</goal>
 						</goals>
@@ -64,8 +65,23 @@
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
+						<phase>package</phase>
 						<goals>
 							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -185,15 +201,20 @@
 	</organization>
 	<distributionManagement>
 		<repository>
-			<id>Artifactory</id>
-			<name>Artifactory-releases</name>
-			<url>http://localhost:6545/artifactory/libs-release-local</url>
+			<id>Sonatype-OSS-Releases</id>
+			<name>Sonatype OSS repository for staging releases</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 		<snapshotRepository>
-			<id>Artifactory</id>
-			<name>Artifactory-snapshots</name>
-			<url>http://localhost:6545/artifactory/libs-snapshot-local</url>
+			<id>Sonatype-OSS-Snapshots</id>
+			<name>Sonatype OSS repository for deploying snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>
-
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 </project>
