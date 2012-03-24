@@ -1,6 +1,7 @@
 package com.righettod.security.test;
 
 import com.righettod.security.annotation.CheckContent;
+import com.righettod.security.annotation.NoTag;
 
 /**
  * Simple bean to test annotation
@@ -33,6 +34,10 @@ public class SimpleBean {
 	/** only-number with locale specified (bundle for this locale do not exists) */
 	@CheckContent(whitelistIdentifier = "only-number", whitelistLocale = "de")
 	private String data6 = null;
+
+	/** noTag */
+	@NoTag
+	private String data7 = null;
 
 	/**
 	 * Getter
@@ -146,6 +151,25 @@ public class SimpleBean {
 	 */
 	public void setData4(String data4) {
 		this.data4 = data4;
+	}
+
+	/**
+	 * Getter
+	 * 
+	 * @return the data7
+	 */
+	public String getData7() {
+		return this.data7;
+	}
+
+	/**
+	 * Setter : No Tag
+	 * 
+	 * @param data7
+	 *        the data7 to set
+	 */
+	public void setData7(String data7) {
+		this.data7 = data7;
 	}
 
 }

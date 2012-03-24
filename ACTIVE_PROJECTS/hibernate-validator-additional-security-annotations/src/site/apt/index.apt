@@ -4,22 +4,34 @@
                       
 Project objective.
 
-	This project have to objective to provide content checking constraints annotations set focused on security using the JSR303 RI Hibernate Validation.
+	This project have to objective to provide content checking constraints annotations set, focused on security, using the JSR303 RI Hibernate Validation.
 	
 	This JSR can be used to perform security check on input user data and then it's for this reason that i decided to use
 	it as framework.
 	
+	{{{http://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/#table-spec-constraints} Consult the list of existing annotations}}                   
+                     
+How to use annotation 'CheckContent'.
+
+	The annotation is named "@CheckContent" and validate content of a string.
+	
+	Elements below are checked:
+	
+ 	* Character continuous repetition.
+ 	
+ 	* Character list against characters whitelist.	
+ 	
+ 	[]
+ 	
 	This annotation do not check the min/max lenght of the value because existing annotation can be used for this type of check:
 	
 	* @Range(min=, max=)
 	
-	* @Length(min=, max=)
+	* @Length(min=, max=) 	
 	
-	{{{http://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/#table-spec-constraints} Consult the list of existing annotations}}                   
-                     
-How to use annotation.
-
-	The annotation is named "@CheckContent" and have the following specific attributes:
+	[]
+	
+	It have the following specific attributes:
 	
 	* whitelistIdentifier.
 	
@@ -52,6 +64,14 @@ How to use annotation.
 	
 	
 	"<<whitelistLocale>>" attribute is used to indicate the locale to used for load bundle (property file) containing the character whitelist (if no locale is specified then the validaor take the default runtime locale).
+
+How to use annotation 'NoTag'.
+
+	The annotation is named "@NoTag" and validate that a string do not contains any HTML/XML tag.
+
+	It have no specific attributes.
+	
+	
 	
 How to use validation. 
 	
