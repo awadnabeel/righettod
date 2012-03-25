@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>hibernate-validator-additional-security-annotations</name>
+	<name>hibernate-validator-security-contribs</name>
 	<comment></comment>
 	<projects>
 	</projects>
