@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>hibernate-validator-additional-security-annotations</groupId>
-	<artifactId>hibernate-validator-additional-security-annotations</artifactId>
+	<groupId>hibernate-validator-security-contribs</groupId>
+	<artifactId>hibernate-validator-security-contribs</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>hibernate-validator-additional-security-annotations</name>
+	<name>hibernate-validator-security-contribs</name>
 	<packaging>jar</packaging>
 	<description>This project have to objective to provide content checking constraints annotations set, focused on security, using the JSR303 RI Hibernate Validation.</description>
 	<dependencies>
