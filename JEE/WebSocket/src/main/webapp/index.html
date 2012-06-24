@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>WebSocket Sample</title>
+<!-- Load JQuery form Google CDN in order to format data display -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<!-- Load third party UUID generator Javascript library -->
+<script type="text/javascript" src="Math.uuid.js"></script>
+
+<!-- Javascript code using managing WebSocket Inbound/Outbound message on client side -->
+<script type="text/javascript">
+	//Url of the WebSocket dedicated servlet
+	var serverSideUrl = "ws://localhost:8787/websocket/stats";
+
+	//Samples sub protocols list (not used on server side but used only for feature demo)
+	var subProtocolsList = [ "A", "B", "C" ];
+
+	//Create WebSocket connection object (we assume here that browser used supports WebSocket)
+	var webSocket = new WebSocket(serverSideUrl, subProtocolsList);
+
+	//Generate UUID for current client (ID lenght = 6 characters)
+	var clientId = Math.uuid(6);
+
+	//Add async events handler to WebSocket connection object
+	webSocket.onopen = function(event) {
+		console.log('Info: WebSocket connection opened for client with Id['
+				+ clientId + '] and protocol[' + event.target.protocol + ']');
+	};
+	webSocket.onmessage = function(event) {
+		console.log('Info: Received data for client with Id[' + clientId
+				+ '] = ' + event.data);
+		$('#display-zone').html(event.data);
+	};
+	webSocket.onclose = function() {
+		console.log('Info: WebSocket connection closed for client with Id['
+				+ clientId + ']');
+	};
+	webSocket.onerror = function(e) {
+		console.log('Error: ' + e.message + 'for client with Id[' + clientId
+				+ ']');
+	};
+
+	//Schedule message sending every random seconds 
+	var interval = Math.floor(Math.random() * (1 + 10 - 2)) + 2;
+	setInterval(function() {
+		webSocket.send(clientId)
+	}, interval * 1000);
+</script>
+</head>
+<body>
+	<p>Open JavaScript console to view messages exchanged....</p>
+	<p>JSON structure used is {CLIENT_ID:MESSAGE_COUNT}</p>
+	<!-- Zone used to display messages stats -->
+	<div id="display-zone" />
+</body>
+</html>
