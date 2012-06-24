@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.keyboardplaying.gwt</groupId>
+	<artifactId>hellomaven</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>GWT with Maven</name>
+	<description>Maven sample GWT project</description>
+
+	<packaging>war</packaging>
+
+	<properties>
+		<gwt.version>2.4.0</gwt.version>
+		<gmp.version>2.4.0</gmp.version>
+		<!-- <gin.version>1.5.0</gin.version> -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	 <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>google-maven-repository</id>
+			<url>https://oss.sonatype.org/content/groups/google/</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<plugins>
+			<!-- Handling of resource files -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- GWT compilation -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>${gmp.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>generateAsync</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<runTarget>index.html</runTarget>
+					<hostedWebapp>
+						${project.build.directory}/${project.build.finalName}
+					</hostedWebapp>
+				</configuration>
+			</plugin>
+
+			<!-- War generation -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>${gwt.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+</project>
