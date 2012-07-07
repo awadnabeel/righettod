@@ -1,7 +1,5 @@
 '''
 detectClickjackingPreventionHeader.py
-
-Copyright 2012 Logica Luxemburg SA.
 '''
 
 
