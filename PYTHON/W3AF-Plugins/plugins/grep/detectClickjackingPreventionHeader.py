@@ -20,8 +20,7 @@ class detectClickjackingPreventionHeader(baseGrepPlugin):
       
     @author: Dominique RIGHETTO (dominique.righetto@owasp.org)    
     '''
-    
-    
+        
     
     def __init__(self):
         baseGrepPlugin.__init__(self)   
@@ -68,7 +67,7 @@ class detectClickjackingPreventionHeader(baseGrepPlugin):
         Configurable parameter is:
             - onlyCheckHtmlContentType
             
-        This could be usefull to identify if Clickjacking is managed by the applicatin at Header level.
+        This could be usefull to identify if Clickjacking is managed by the application at Header level.
         '''
     
     def grep(self, request, response):
@@ -84,7 +83,7 @@ class detectClickjackingPreventionHeader(baseGrepPlugin):
         if self._only_check_html_content_type:
             for header_name in response.getHeaders().keys():
                 if header_name.upper().strip() == "CONTENT-TYPE":
-                    if not response.getHeaders()[header_name].upper().strip().endswith("HTML"):
+                    if response.getHeaders()[header_name].upper().find("/HTML") == -1:
                         return
                                 
         # I search for header in HTTP response headers collection
