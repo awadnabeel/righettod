@@ -13,6 +13,7 @@ if(len(sys.argv) != 2):
     print "   Ex: %s /opt/w3af" % sys.argv[0]
     print "       %s D:/w3af" % sys.argv[0]
 else:
+    print "Deploying plugins..."
     w3afLocation = sys.argv[1] + "/plugins"
     dir_util.copy_tree("plugins", w3afLocation)
     print "Plugins deployed to '%s'." % w3afLocation
