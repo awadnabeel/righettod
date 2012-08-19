@@ -16,5 +16,5 @@ else:
     print "Deploying plugins..."
     w3afLocation = sys.argv[1] + "/plugins"
     dir_util.copy_tree("plugins", w3afLocation)
-    print "Plugins deployed to '%s'." % w3afLocation
+    print "Plugins deployed to: '%s'." % w3afLocation
         

@@ -7,7 +7,6 @@ from core.data.options.optionList import optionList
 from core.data.options.option import option
 from core.data.constants import httpConstants
 from core.controllers.w3afException import w3afException
-import urllib2
 import random
 import core.controllers.outputManager as om
 import core.data.kb.knowledgeBase as kb
@@ -28,7 +27,6 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
         '''
         baseAuditPlugin.__init__(self)
         #Define plugin options configuration variables
-        self.debug = False
         self.originHeaderValue = "http://w3af.sourceforge.net"
         self.expectedHttpResponseCode = httpConstants.OK
         
@@ -43,25 +41,20 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
         url = freq.getURL()
                 
         #Try to send a forged HTTP request in order to test target application behavior
+        #Use HTTP class provided by W3AF framework : "core.data.url.xUrllib"
         try:
-            #Build request content
-            forgedReq = urllib2.Request(url.url_string)
-            forgedReq.add_header("User-Agent", "W3AF")
-            forgedReq.add_header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-            forgedReq.add_header("Accept-Language", "en-us,en;q=0.5")
-            forgedReq.add_header("Accept-Charset", "ISO-8859-1,utf-8;q=0.7,*;q=0.7")
-            forgedReq.add_header("Origin", self.originHeaderValue.strip())
+            #Build request
+            forgedReq = "GET " + url.getPath() + " HTTP/1.1\r\n"
+            forgedReq = forgedReq + "Host: " + url.getDomain() + ":" + str(url.getPort()) + "\r\n"
+            forgedReq = forgedReq + "User-Agent: W3AF\r\n"
+            forgedReq = forgedReq + "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n"
+            forgedReq = forgedReq + "Accept-Language: en-us,en;q=0.5\r\n"
+            forgedReq = forgedReq + "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\n"
+            forgedReq = forgedReq + "Origin: " + self.originHeaderValue.strip() + "\r\n"            
             #Sent request and analyze response
-            if(self.debug):
-                dLevel = 1
-            else:
-                dLevel = 0                                
-            #--Sent request
-            httpHandler = urllib2.HTTPHandler(debuglevel=dLevel)
-            opener = urllib2.build_opener(httpHandler)
-            response = opener.open(forgedReq)
-            responseCode = response.getcode()
-            opener.close() 
+            #--Sent request            
+            response = self._uri_opener.sendRawRequest(forgedReq, "")
+            responseCode = response.getCode()
             #--Analyze response
             if responseCode == self.expectedHttpResponseCode:
                 v = vuln.vuln()
@@ -82,18 +75,14 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
         @return: A list of option objects for this plugin.
         '''
         ol = optionList()
-        d1 = "Debug mode"
-        h1 = "If set to True, w3af will print HTTP request/response exchanges with target application"
-        o1 = option('debug', self.debug, d1, "boolean", help=h1)        
-        ol.add(o1)
-        d2 = "Origin HTTP header value"
-        h2 = "Define value used to specify the 'Origin' HTTP header for HTTP request sent to test application behavior"
-        o2 = option('originHeaderValue', self.originHeaderValue, d2, "string", help=h2)        
-        ol.add(o2)        
-        d3 = "Expected HTTP response code from application for normal case"
-        h3 = "Define the HTTP response code that the application return when it have successfully processed a HTTP request"
-        o3 = option('expectedHttpResponseCode', self.expectedHttpResponseCode, d3, "integer", help=h3)        
-        ol.add(o3)                
+        d1 = "Origin HTTP header value"
+        h1 = "Define value used to specify the 'Origin' HTTP header for HTTP request sent to test application behavior"
+        o1 = option('originHeaderValue', self.originHeaderValue, d1, "string", help=h1)        
+        ol.add(o1)        
+        d2 = "Expected HTTP response code from application when it have successfully processed a HTTP request"
+        h2 = "Define the HTTP response code that the application return when it have successfully processed a HTTP request"
+        o2 = option('expectedHttpResponseCode', self.expectedHttpResponseCode, d2, "integer", help=h2)        
+        ol.add(o2)                
         return ol
 
     def setOptions(self, optionList):
@@ -104,7 +93,6 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
         @parameter OptionList: A dictionary with the options for the plugin.
         @return: No value is returned.
         '''
-        self.debug = optionList['debug'].getValue()
         self.originHeaderValue = optionList['originHeaderValue'].getValue()
         self.expectedHttpResponseCode = optionList['expectedHttpResponseCode'].getValue()   
         #Check options setted
@@ -131,7 +119,6 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
         of the remote IP address/Host of the sender of the incoming HTTP request.
         
         Configurable parameters are:
-            - debug
             - originHeaderValue
             - expectedHttpResponseCode      
       

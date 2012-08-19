@@ -6,13 +6,11 @@ from core.data.options.optionList import optionList
 from core.data.options.option import option
 from core.data.constants import httpConstants
 from core.controllers.w3afException import w3afException
-import urllib2
 import random
 import core.controllers.outputManager as om
 import core.data.kb.knowledgeBase as kb
 import core.data.kb.vuln as vuln
 import core.data.constants.severity as severity
-from urllib2 import HTTPError
 
 
 
@@ -30,7 +28,6 @@ class inspectRequestPreflight(baseAuditPlugin):
         '''
         baseAuditPlugin.__init__(self)
         #Define plugin options configuration variables
-        self.debug = False
         self.originHeaderValue = "http://w3af.sourceforge.net"
         self.expectedHttpResponseCode = httpConstants.FORBIDDEN
         self.testHttpMethod = "POST"
@@ -45,29 +42,24 @@ class inspectRequestPreflight(baseAuditPlugin):
         url = freq.getURL()
                 
         #Try to send a forged HTTP request in order to test target application behavior
-        try:
+        #Use HTTP class provided by W3AF framework : "core.data.url.xUrllib"
+        try:         
             #Build request content
-            forgedReq = urllib2.Request(url.url_string)
-            forgedReq.add_header("User-Agent", "W3AF")
-            forgedReq.add_header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-            forgedReq.add_header("Accept-Language", "en-us,en;q=0.5")
-            forgedReq.add_header("Accept-Charset", "ISO-8859-1,utf-8;q=0.7,*;q=0.7")
-            forgedReq.add_header("Origin", self.originHeaderValue.strip())
-            forgedReq.add_header("Content-Type", "application/json")
-            forgedReq.add_header("X-W3AF-PLUGIN", "inspectRequestPreflight")            
-            forgedReq.add_data('{"Content":"W3AF Test From inspectRequestPreflight plugin"}')
-            forgedReq.get_method = lambda: self.testHttpMethod
+            forgedReqBody = '{"Content":"W3AF Test From inspectRequestPreflight plugin"}'
+            forgedReq = self.testHttpMethod + " " + url.getPath() + " HTTP/1.1\r\n"
+            forgedReq = forgedReq + "Host: " + url.getDomain() + ":" + str(url.getPort()) + "\r\n"
+            forgedReq = forgedReq + "User-Agent: W3AF\r\n"
+            forgedReq = forgedReq + "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n"
+            forgedReq = forgedReq + "Accept-Language: en-us,en;q=0.5\r\n"
+            forgedReq = forgedReq + "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\n"
+            forgedReq = forgedReq + "Origin: " + self.originHeaderValue.strip() + "\r\n"  
+            forgedReq = forgedReq + "Content-Type: application/json\r\n"  
+            forgedReq = forgedReq + "Content-Length: " + str(len(forgedReqBody)) + "\r\n"  
+            forgedReq = forgedReq + "X-W3AF-PLUGIN: inspectRequestPreflight\r\n" 
             #Sent request and analyze response
-            if(self.debug):
-                dLevel = 1
-            else:
-                dLevel = 0  
             #--Sent request
-            httpHandler = urllib2.HTTPHandler(debuglevel=dLevel)
-            opener = urllib2.build_opener(httpHandler)
-            response = opener.open(forgedReq)
-            responseCode = response.getcode()
-            opener.close() 
+            response = self._uri_opener.sendRawRequest(forgedReq, forgedReqBody, False)
+            responseCode = response.getCode()                    
             #--Analyze response
             if responseCode != self.expectedHttpResponseCode:
                 v = vuln.vuln()
@@ -78,16 +70,7 @@ class inspectRequestPreflight(baseAuditPlugin):
                 v.setId(random.randint(1, 100) * random.randint(1, 100))
                 msg = 'Application seems to accept the ' + self.testHttpMethod + ' request type even if an OPTIONS request type has not be previously sent to preflight the current request.'
                 v.setDesc(msg)
-                kb.kb.append(self , 'inspectRequestPreflight' , v)      
-        except HTTPError, e:
-            #Manage case where application return an HTTP error response code.
-            #Case can exists where the expected reponse code is an error response code when the applicatin detect a non preflighted request.
-            #In this case the 'urllib2' (default HTTP error handler) throw an HTTPError 
-            #then we check if the response code correspond the to the one expected... 
-            if e.code != self.expectedHttpResponseCode:
-                om.out.error("The application have sent a HTTP response code '" + str(e.code) + "' for url '" + url.url_string + "'.")   
-            #We do not log a vulnerability because the request has not been accepted by the application but we 
-            #log some infos to show that the request has been managed by application....                                
+                kb.kb.append(self , 'inspectRequestPreflight' , v)                                    
         except Exception, e:
             #Manage error       
             om.out.error('Error in audit.inspectRequestPreflight: "' + repr(e) + '".')       
@@ -97,22 +80,18 @@ class inspectRequestPreflight(baseAuditPlugin):
         @return: A list of option objects for this plugin.
         '''
         ol = optionList()
-        d1 = "Debug mode"
-        h1 = "If set to True, w3af will print HTTP request/response exchanges with target application"
-        o1 = option('debug', self.debug, d1, "boolean", help=h1)        
-        ol.add(o1)
-        d2 = "Origin HTTP header value in order to create a CORS request type"
-        h2 = "Define value used to specify the 'Origin' HTTP header in order to create a CORS request type"
-        o2 = option('originHeaderValue', self.originHeaderValue, d2, "string", help=h2)        
-        ol.add(o2)        
-        d3 = "Expected HTTP response code from application if it detect a request that must be preflighted but have not respected the preflight process defined by W3C specification"
-        h3 = "Define the HTTP response code that the application return if it detect that a request that must be preflighted but have not respected the preflight process defined by W3C specification"
-        o3 = option('expectedHttpResponseCode', self.expectedHttpResponseCode, d3, "integer", help=h3)        
-        ol.add(o3)
-        d4 = "HTTP method to use for the request that will be forged to test the application behavior"
-        h4 = "Define the HTTP method to use for the request that will be forged to test the application behavior (value must be 'POST' or 'DELETE' or 'PUT')"
-        o4 = option('testHttpMethod', self.testHttpMethod, d4, "string", help=h4)        
-        ol.add(o4)           
+        d1 = "Origin HTTP header value in order to create a CORS request type"
+        h1 = "Define value used to specify the 'Origin' HTTP header in order to create a CORS request type"
+        o1 = option('originHeaderValue', self.originHeaderValue, d1, "string", help=h1)        
+        ol.add(o1)        
+        d2 = "Expected HTTP response code from application if it detect a request that must be preflighted but have not respected the preflight process defined by W3C specification"
+        h2 = "Define the HTTP response code that the application return if it detect that a request that must be preflighted but have not respected the preflight process defined by W3C specification"
+        o2 = option('expectedHttpResponseCode', self.expectedHttpResponseCode, d2, "integer", help=h2)        
+        ol.add(o2)
+        d3 = "HTTP method to use for the request that will be forged to test the application behavior"
+        h3 = "Define the HTTP method to use for the request that will be forged to test the application behavior (value must be 'POST' or 'DELETE' or 'PUT')"
+        o3 = option('testHttpMethod', self.testHttpMethod, d3, "string", help=h3)        
+        ol.add(o3)           
         return ol
 
     def setOptions(self, optionList):
@@ -123,7 +102,6 @@ class inspectRequestPreflight(baseAuditPlugin):
         @parameter OptionList: A dictionary with the options for the plugin.
         @return: No value is returned.
         '''
-        self.debug = optionList['debug'].getValue()
         self.originHeaderValue = optionList['originHeaderValue'].getValue()
         self.expectedHttpResponseCode = optionList['expectedHttpResponseCode'].getValue()   
         self.testHttpMethod = optionList['testHttpMethod'].getValue()   
@@ -155,7 +133,6 @@ class inspectRequestPreflight(baseAuditPlugin):
         preflighted in case of 'Cross Origin Resource Sharing (CORS)' request type.
         
         Configurable parameters are:
-            - debug
             - originHeaderValue
             - expectedHttpResponseCode      
             - testHttpMethod
