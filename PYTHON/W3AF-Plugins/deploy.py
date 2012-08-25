@@ -1,5 +1,5 @@
 '''
-Script to deploy plugins to a W3AF instance.
+Script to deploy plugins/core to a W3AF instance.
 
 @author: Dominique RIGHETTO (dominique.righetto@owasp.org)
 '''
@@ -16,5 +16,8 @@ else:
     print "Deploying plugins..."
     w3afLocation = sys.argv[1] + "/plugins"
     dir_util.copy_tree("plugins", w3afLocation)
-    print "Plugins deployed to: '%s'." % w3afLocation
+    print "Deploying core..."
+    w3afLocation = sys.argv[1] + "/core"
+    dir_util.copy_tree("core", w3afLocation)    
+    print "Plugins and Core deployed to: '%s'." % sys.argv[1]
         

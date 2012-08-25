@@ -1,5 +1,22 @@
 '''
 inspectOriginHeaderScrutiny.py
+
+Copyright 2012 Andres Riancho
+
+This file is part of w3af, w3af.sourceforge.net .
+
+w3af is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation version 2 of the License.
+    
+w3af is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with w3af; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 '''
 
 from core.controllers.basePlugin.baseAuditPlugin import baseAuditPlugin
@@ -7,6 +24,7 @@ from core.data.options.optionList import optionList
 from core.data.options.option import option
 from core.data.constants import httpConstants
 from core.controllers.w3afException import w3afException
+from core.controllers.misc import corsUtils
 import random
 import core.controllers.outputManager as om
 import core.data.kb.knowledgeBase as kb
@@ -28,7 +46,9 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
         baseAuditPlugin.__init__(self)
         #Define plugin options configuration variables
         self.originHeaderValue = "http://w3af.sourceforge.net"
-        self.expectedHttpResponseCode = httpConstants.OK
+        self.expectedHttpResponseCode = httpConstants.OK   
+        #Define utility class instance
+        self.xrsUtils = corsUtils.CorsUtils()
         
     def audit(self, freq):
         '''
@@ -36,6 +56,10 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
 
         @param freq: A fuzzableRequest
         ''' 
+
+        #Detect if current url provides CORS features   
+        if not self.xrsUtils.providesCorsFeatures(freq, self._uri_opener):
+            return      
         
         #Get current URL object
         url = freq.getURL()
