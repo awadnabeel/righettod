@@ -25,7 +25,6 @@ from core.data.options.option import option
 from core.data.constants import httpConstants
 from core.controllers.w3afException import w3afException
 from core.controllers.misc import corsUtils
-import random
 import core.controllers.outputManager as om
 import core.data.kb.knowledgeBase as kb
 import core.data.kb.vuln as vuln
@@ -86,7 +85,7 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
                 v.setPluginName(self.getName())
                 v.setName('Inspect Origin Header Scrutiny')
                 v.setURL(url)
-                v.setId(random.randint(1, 100) * random.randint(1, 100))
+                v.setId(response.id)
                 msg = 'Application seems to reply correctly event if it tampers with the "Origin" HTTP header.'
                 v.setDesc(msg)
                 kb.kb.append(self , 'inspectOriginHeaderScrutiny' , v)                 

@@ -24,7 +24,6 @@ from core.data.options.option import option
 from core.data.constants import httpConstants
 from core.controllers.w3afException import w3afException
 from core.controllers.misc import corsUtils
-import random
 import core.controllers.outputManager as om
 import core.data.kb.knowledgeBase as kb
 import core.data.kb.vuln as vuln
@@ -92,7 +91,7 @@ class inspectRequestPreflight(baseAuditPlugin):
                 v.setPluginName(self.getName())
                 v.setName('Inspect Request Preflight')
                 v.setURL(url)
-                v.setId(random.randint(1, 100) * random.randint(1, 100))
+                v.setId(response.id)
                 msg = 'Application seems to accept the ' + self.testHttpMethod + ' request type even if an OPTIONS request type has not be previously sent to preflight the current request.'
                 v.setDesc(msg)
                 kb.kb.append(self , 'inspectRequestPreflight' , v)                                    
