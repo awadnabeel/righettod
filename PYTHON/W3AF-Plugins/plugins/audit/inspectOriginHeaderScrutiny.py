@@ -77,9 +77,10 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
             #Sent request and analyze response
             #--Sent request            
             response = self._uri_opener.sendRawRequest(forgedReq, "")
+            #--Analyze response : Check couple 'access-control-allow-origin' header + response code
             responseCode = response.getCode()
-            #--Analyze response
-            if responseCode == self.expectedHttpResponseCode:
+            accessControlAllowOriginHeaderValue = self.xrsUtils.retrieveCorsResponseHeaderValue(response, self.xrsUtils.AccessControlAllowOrigin)
+            if ((accessControlAllowOriginHeaderValue != "*") and (accessControlAllowOriginHeaderValue != self.originHeaderValue) and (responseCode == self.expectedHttpResponseCode)):
                 v = vuln.vuln()
                 v.setSeverity(severity.MEDIUM)
                 v.setPluginName(self.getName())

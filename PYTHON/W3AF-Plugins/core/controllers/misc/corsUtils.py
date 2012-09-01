@@ -25,13 +25,17 @@ class CorsUtils(object):
     
     @author: Dominique RIGHETTO (dominique.righetto@owasp.org)     
     '''
-
-
+                 
     def __init__(self):
         '''
         Constructor.
         '''
-        self.referenceHeaderToDetectCorsSupports = "ACCESS-CONTROL-ALLOW-ORIGIN"
+        #Keys representing CORS headers for manipulations.
+        self.AccessControlAllowOrigin = "ACCESS-CONTROL-ALLOW-ORIGIN"
+        self.AccessControlAllowMethods = "ACCESS-CONTROL-ALLOW-METHODS"
+        self.AccessControlAllowHeaders = "ACCESS-CONTROL-ALLOW-HEADERS"
+        self.AccessControlAllowMaxAge = "ACCESS-CONTROL-ALLOW-MAX-AGE"
+        self.AccessControlAllowCredentials = "ACCESS-CONTROL-ALLOW-MAX-CREDENTIALS"        
         
     def providesCorsFeatures(self, freq, url_opener):
         '''
@@ -57,13 +61,24 @@ class CorsUtils(object):
         response = url_opener.sendRawRequest(forgedReq, "")
         #--Analyse response (explicitly do not care about response code)         
         for headerName in response.getHeaders().keys():
-            if headerName.upper().strip() == self.referenceHeaderToDetectCorsSupports:  
+            if headerName.upper().strip() == self.AccessControlAllowOrigin:  
                 supportsCors = True
                 break
         
         #Return detection result flag
         return supportsCors             
+       
+       
+    def retrieveCorsResponseHeaderValue(self, response, key):   
+        '''
+        Method to retrieve a CORS header value from a HTTP response.
         
-        
-        
-        
+        @param response: A httpResponse
+        @param key: a corsUtils.XXXXX provided key representing the desired header value to retrieve.
+        @return: The header value or "" if the header do not exists. 
+        '''        
+        for headerName in response.getHeaders().keys():
+            if headerName.upper().strip() == key:                
+                return response.getHeaders()[headerName]
+                break      
+        return ""
