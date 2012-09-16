@@ -41,7 +41,7 @@ class CorsUtils(object):
         '''
         Method to detect if url provides CORS features.
         
-        @param freq: A fuzzableRequest
+        @param freq: A fuzzableRequest object.
         @param url_opener: "core.data.url.xUrllib" class instance to use for HTTP request/response processing.
         @return: True if the url provides CORS features, False otherwise. 
         '''        
@@ -73,12 +73,31 @@ class CorsUtils(object):
         '''
         Method to retrieve a CORS header value from a HTTP response.
         
-        @param response: A httpResponse
-        @param key: a corsUtils.XXXXX provided key representing the desired header value to retrieve.
-        @return: The header value or "" if the header do not exists. 
+        @param response: A httpResponse object.
+        @param key: A corsUtils.XXXXX provided key representing the desired header value to retrieve.
+        @return: The header value or None if the header do not exists. 
         '''        
         for headerName in response.getHeaders().keys():
             if headerName.upper().strip() == key:                
                 return response.getHeaders()[headerName]
                 break      
-        return ""
+        return None
+    
+    
+    def buildCorsGetHttpRequest(self, urlInfos, originHeaderValue):
+        '''
+        Method to generate a "GET" CORS HTTP request based on input context. 
+
+        @parameter urlInfos: A url_object object.
+        @parameter originHeaderValue: Value of the "ORIGIN" HTTP request header (if value is set to None then the "ORIGIN" header is skipped).
+        @return: HTTP request as string.
+        '''        
+        forgedReq = "GET " + urlInfos.getPath() + " HTTP/1.1\r\n"
+        forgedReq = forgedReq + "Host: " + urlInfos.getDomain() + ":" + str(urlInfos.getPort()) + "\r\n"
+        forgedReq = forgedReq + "User-Agent: W3AF\r\n"
+        forgedReq = forgedReq + "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n"
+        forgedReq = forgedReq + "Accept-Language: en-us,en;q=0.5\r\n"
+        forgedReq = forgedReq + "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\n"
+        if(originHeaderValue != None):
+            forgedReq = forgedReq + "Origin: " + originHeaderValue.strip() + "\r\n"           
+        return forgedReq

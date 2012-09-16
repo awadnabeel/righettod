@@ -46,6 +46,7 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
         #Define plugin options configuration variables
         self.originHeaderValue = "http://w3af.sourceforge.net"
         self.expectedHttpResponseCode = httpConstants.OK   
+        self.enableExtendedMode = False
         #Define utility class instance
         self.xrsUtils = corsUtils.CorsUtils()
         
@@ -66,30 +67,57 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
         #Try to send a forged HTTP request in order to test target application behavior
         #Use HTTP class provided by W3AF framework : "core.data.url.xUrllib"
         try:
-            #Build request
-            forgedReq = "GET " + url.getPath() + " HTTP/1.1\r\n"
-            forgedReq = forgedReq + "Host: " + url.getDomain() + ":" + str(url.getPort()) + "\r\n"
-            forgedReq = forgedReq + "User-Agent: W3AF\r\n"
-            forgedReq = forgedReq + "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n"
-            forgedReq = forgedReq + "Accept-Language: en-us,en;q=0.5\r\n"
-            forgedReq = forgedReq + "Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\n"
-            forgedReq = forgedReq + "Origin: " + self.originHeaderValue.strip() + "\r\n"            
-            #Sent request and analyze response
-            #--Sent request            
-            response = self._uri_opener.sendRawRequest(forgedReq, "")
-            #--Analyze response : Check couple 'access-control-allow-origin' header + response code
-            responseCode = response.getCode()
-            accessControlAllowOriginHeaderValue = self.xrsUtils.retrieveCorsResponseHeaderValue(response, self.xrsUtils.AccessControlAllowOrigin)
-            if ((accessControlAllowOriginHeaderValue != "*") and (accessControlAllowOriginHeaderValue != self.originHeaderValue) and (responseCode == self.expectedHttpResponseCode)):
-                v = vuln.vuln()
-                v.setSeverity(severity.MEDIUM)
-                v.setPluginName(self.getName())
-                v.setName('Inspect Origin Header Scrutiny')
-                v.setURL(url)
-                v.setId(response.id)
-                msg = 'Application seems to reply correctly event if it tampers with the "Origin" HTTP header.'
-                v.setDesc(msg)
-                kb.kb.append(self , 'inspectOriginHeaderScrutiny' , v)                 
+            #Basic mode : Only one originator
+            originatorList = [self.originHeaderValue]
+            #Extended mode : Add more originator
+            if(self.enableExtendedMode):
+                originatorList.append(None)
+                originatorList.append("http://www.google.com")
+                originatorList.append("")
+                originatorList.append("null")
+                originatorList.append("*")
+            #Perform check(s)
+            accessControlAllowOriginHeaderValueList = []
+            for originator in originatorList:    
+                #-- Build request
+                forgedReq = self.xrsUtils.buildCorsGetHttpRequest(url, originator)
+                #-- Send forged request and retrieve response informations
+                response = self._uri_opener.sendRawRequest(forgedReq, "")
+                accessControlAllowOriginHeaderValue = self.xrsUtils.retrieveCorsResponseHeaderValue(response, self.xrsUtils.AccessControlAllowOrigin)
+                responseCode = response.getCode()
+                #-- Check response informations              
+                if ((accessControlAllowOriginHeaderValue != "*") and (accessControlAllowOriginHeaderValue != originator) and (responseCode == self.expectedHttpResponseCode)):
+                    v = vuln.vuln()
+                    v.setSeverity(severity.MEDIUM)
+                    v.setPluginName(self.getName())
+                    v.setName('Inspect Origin Header Scrutiny')
+                    v.setURL(url)
+                    v.setId(response.id)
+                    if(originator != None):
+                        msg = 'Application seems to reply correctly event if it tampers with the "Origin" HTTP header using value "' + originator + '".'
+                    else:
+                        msg = 'Application seems to reply correctly event if we do not add a "Origin" HTTP header.'
+                    if(accessControlAllowOriginHeaderValue != None):    
+                        msg = msg + ' W3AF has received "' + accessControlAllowOriginHeaderValue + '" value for "AccessControlAllowOrigin" HTTP header.'
+                    else:
+                        msg = msg + ' W3AF has not find any occurence of "AccessControlAllowOrigin" HTTP header.'                        
+                    v.setDesc(msg)
+                    kb.kb.append(self , 'inspectOriginHeaderScrutiny' , v)    
+                #-- Save current value of the "AccessControlAllowOriginHeaderValue" in order to perform an extra check on value variation at the end...
+                accessControlAllowOriginHeaderValueList.append(accessControlAllowOriginHeaderValue)
+            #Perform extra check on "AccessControlAllowOriginHeaderValue" value variation
+            if(len(accessControlAllowOriginHeaderValueList) > 1 and self.enableExtendedMode):
+                firstValue = accessControlAllowOriginHeaderValueList[0]
+                if(accessControlAllowOriginHeaderValueList.count(firstValue) != len(accessControlAllowOriginHeaderValueList)):
+                    v = vuln.vuln()
+                    v.setSeverity(severity.MEDIUM)
+                    v.setPluginName(self.getName())
+                    v.setName('Inspect Origin Header Scrutiny')
+                    v.setURL(url)
+                    v.setId(response.id)
+                    msg = 'Application HTTP response header "AccessControlAllowOrigin" value is different between HTTP requests.'
+                    v.setDesc(msg)
+                    kb.kb.append(self , 'inspectOriginHeaderScrutiny' , v)                       
         except Exception, e:
             #Manage error       
             om.out.error('Error in audit.inspectOriginHeaderScrutiny: "' + repr(e) + '".')
@@ -106,7 +134,11 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
         d2 = "Expected HTTP response code from application when it have successfully processed a HTTP request"
         h2 = "Define the HTTP response code that the application return when it have successfully processed a HTTP request"
         o2 = option('expectedHttpResponseCode', self.expectedHttpResponseCode, d2, "integer", help=h2)        
-        ol.add(o2)                
+        ol.add(o2)
+        d3 = "Flag to enable the extended running mode of the plugin: Normal mode check application response against only one value of the 'Origin' header (value specified or default value) - Extended mode check application response against several value of the 'Origin' header (value specified or default value + others predefined values)."
+        h3 = "Enable the extended running mode"
+        o3 = option('enableExtendedMode', self.enableExtendedMode, d3, "boolean", help=h3)        
+        ol.add(o3)         
         return ol
 
     def setOptions(self, optionList):
@@ -119,13 +151,14 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
         '''
         self.originHeaderValue = optionList['originHeaderValue'].getValue()
         self.expectedHttpResponseCode = optionList['expectedHttpResponseCode'].getValue()   
+        self.enableExtendedMode = optionList['enableExtendedMode'].getValue()   
         #Check options setted
         if self.expectedHttpResponseCode < 100 or self.expectedHttpResponseCode > 505:
             msg = 'Please enter a valid HTTP response code (see valid code list on "http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html") !'
             raise w3afException(msg)
         if self.originHeaderValue is None or len(self.originHeaderValue.strip()) == 0 :
             msg = 'Please enter a valid value for the "Origin" HTTP header !'
-            raise w3afException(msg)                         
+            raise w3afException(msg)                                           
 
     def getPluginDeps(self):
         '''
@@ -144,7 +177,8 @@ class inspectOriginHeaderScrutiny(baseAuditPlugin):
         
         Configurable parameters are:
             - originHeaderValue
-            - expectedHttpResponseCode      
+            - expectedHttpResponseCode    
+            - enableExtendedMode  
       
         Note : This plugin is useful to test "Cross Origin Resource Sharing (CORS)" application behaviors.
         CORS : http://developer.mozilla.org/en-US/docs/HTTP_access_control
