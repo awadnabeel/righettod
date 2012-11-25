@@ -7,12 +7,17 @@ import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileStore;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.UserPrincipal;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,19 +27,16 @@ import java.util.Locale;
 import java.util.concurrent.TimeoutException;
 import java.util.zip.DataFormatException;
 
+import org.apache.derby.jdbc.EmbeddedDataSource;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
  * This class is used to explore new features of the JDK 1.7<br>
- * <br>
- * TODO : Add sample with Java DB embedded into JDK
  * 
  * @see "http://www.rapidprogramming.com/tutorial/List-Java-1-7-Features-418"
  * @see "http://www.slideshare.net/denizoguz/new-features-of-jdk-7#btnNext"
- * 
- * 
  * 
  * @author Dominique Righetto (dominique.righetto@gmail.com)
  * 
@@ -236,4 +238,70 @@ public class NewFeaturesExplorationTest {
 			}
 		}
 	}
+
+	/**
+	 * Explore "Java DB embbeded within JDK".<br>
+	 * JDK 7 includes Java DB 10.8.1.2.<br>
+	 * Here is provided through a Maven dependency on Derby but JavaDB is Derby !!!<br>
+	 * "derby.jar" file from JavaDB and Derby project are the same...
+	 * 
+	 * @see "http://docs.oracle.com/javadb/index_jdk7.html"
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testJavaDB() throws Exception {
+		System.out.println("*** Java DB ***");
+		// Remove existing DB file using NIO 2 new features :o)
+		Path dbRef = Paths.get(new File("SampleDB").toURI());
+		Files.walkFileTree(dbRef, new SimpleFileVisitor<Path>() {
+			@Override
+			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+				Files.delete(file);
+				return FileVisitResult.CONTINUE;
+			}
+
+			@Override
+			public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+				// try to delete the file anyway, even if its attributes
+				// could not be read, since delete-only access is
+				// theoretically possible
+				Files.delete(file);
+				return FileVisitResult.CONTINUE;
+			}
+
+			@Override
+			public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+				if (exc == null) {
+					Files.delete(dir);
+					return FileVisitResult.CONTINUE;
+				}
+				// directory iteration failed; propagate exception
+				throw exc;
+			}
+		});
+
+		/* Create database */
+		EmbeddedDataSource database = new EmbeddedDataSource();
+		database.setCreateDatabase("create");
+		database.setDatabaseName("SampleDB");
+		/* Do action on DB */
+		// Get Connection
+		try (Connection dbConnection = database.getConnection()) {
+			dbConnection.setAutoCommit(true);
+			// Get DB Statement
+			// If an SQLException occurs here it will catched by parent catch block...
+			try (Statement stmt = dbConnection.createStatement()) {
+				stmt.execute("CREATE TABLE DerbyTax(userName varchar(20), returnName varchar(20))");
+			}
+			System.out.printf("Database Product Name    = %s\n", dbConnection.getMetaData().getDatabaseProductName());
+			System.out.printf("Database Product Version = %s\n", dbConnection.getMetaData().getDatabaseProductVersion());
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		// Shutdown DB
+		database.setShutdownDatabase("shutdown");
+	}
+
 }
