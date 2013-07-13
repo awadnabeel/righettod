@@ -1,0 +1,106 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>eu.righettod</groupId>
+	<artifactId>enforce-victims-rule-sample</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>VictimsEnforceRuleExtension</name>
+	<description>Sample project showing use of enforce-victims-rule extension "https://github.com/victims/victims-enforcer"</description>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<!-- Dependency below are OK -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Dependencies below are is KO because its contains a vulnerability identified into CVE database -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>2.5.6</version>
+		</dependency>            		
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<!-- enforce-victims-rule extension for maven-enforcer-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>1.3</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.redhat.victims</groupId>
+						<artifactId>enforce-victims-rule</artifactId>
+						<version>1.3.1</version>
+						<type>jar</type>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>apply-enforce-victims-rule</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+						<!-- See https://github.com/victims/victims-enforcer/blob/master/src/main/java/com/redhat/victims/Settings.java for settings list -->
+							<rules>
+								<rule implementation="com.redhat.victims.VictimsRule">
+									<!-- Check the project's dependencies against the database using 
+										name and version. The default mode for this is 'warning'. Valid options are:
+										 
+										- disabled: Rule is still run but only INFO level messages aand no errors. 
+										- warning : Rule will spit out a warning message but doesn't result in a failure. 
+										- fatal : Rule will spit out an error message and fail the build. -->
+									<metadata>warning</metadata>
+
+									<!-- Check the project's dependencies against the database using 
+										the SHA-512 checksum of the artifact. The default is fatal. Valid options 
+										are:
+										 
+										- disabled: Rule is still run but only INFO level messages and no errors. 
+										- warning : Rule will spit out a warning message but doesn't result in a failure. 
+										- fatal : Rule will spit out an error message and fail the build. -->
+									<fingerprint>warning</fingerprint>
+
+									<!-- Disables the synchronization mechansim. By default the rule 
+										will attempt to update the database for each build. Valid options are: 
+										
+										- auto : Automatically update the database entries on each build.
+										- daily: Automatically update the database entries one time by day. 
+										- off  : Disable the synchronization mechanism. -->
+									<updates>auto</updates>
+									
+									<!-- Specify CVE H2 DB local cache storage location using JDBC URL -->
+									<jdbcUrl>jdbc:h2:file:D:/TMP/CVELocalCache</jdbcUrl>
+									
+									<!-- Specify some dummy credentials in order to enable connection to H2 DB using a client like SQLWorkbench -->
+									<jdbcUser>dom</jdbcUser>
+									<jdbcPass>dom</jdbcPass>
+
+								</rule>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
