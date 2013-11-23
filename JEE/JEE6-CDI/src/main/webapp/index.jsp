@@ -1,0 +1,1 @@
+<jsp:forward page="/cdi?str=Hi%20Dom"></jsp:forward>

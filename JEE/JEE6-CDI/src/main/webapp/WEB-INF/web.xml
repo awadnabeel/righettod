@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+
+	<display-name>CDI example</display-name>
+
+	<!-- Used to boot Weld (CDI RI from JBoss), and control its interaction with requests -->
+	<!-- Note: Servlet containers are not required to support Java EE services like CDI. However, you can use CDI in a servlet container like Tomcat by embedding a standalone CDI implementation such as Weld. Weld 
+		comes with a servlet listener which bootstraps the CDI environment, registers the BeanManager in JNDI and provides injection into servlets. Basically, it emulates some of the work done by the Java EE container. 
+		(But you don't get enterprise features such as session beans and container-managed transactions.) -->
+	<!-- See http://docs.jboss.org/weld/reference/latest/en-US/html/gettingstarted.html#tomcat -->
+	<listener>
+		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+	</listener>
+
+</web-app>

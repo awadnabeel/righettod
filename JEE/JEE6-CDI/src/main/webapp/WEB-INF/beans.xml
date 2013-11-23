@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- File required to enable CDI in application -->
+<!-- See http://docs.oracle.com/javaee/6/tutorial/doc/gjbnz.html -->
+<beans xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+  http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
+	<!-- In order for an interceptor to be invoked in a CDI application, it must be specified in the beans.xml file -->
+	<!-- If an application uses more than one interceptor, the interceptors are invoked in the order specified in the beans.xml file -->
+	<interceptors>
+		<class>com.googlecode.righettod.jee6cdi.interceptor.AuditProcessingInterceptor</class>
+	</interceptors>
+</beans>
