@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource type="javax.sql.DataSource" name="jdbc/storeDS" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" driverClassName="org.h2.Driver" url="jdbc:h2:file:target/db/testdb"
+	username="sa" password="" />
+</Context>

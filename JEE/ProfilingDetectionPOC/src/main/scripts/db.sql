@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS visit;
+DROP TABLE IF EXISTS app_feature_ref;
+DROP TABLE IF EXISTS visit_fake_cookies;
+CREATE TABLE visit(visitor_id varchar(255),feature_uri varchar(255),last_visit date);
+CREATE TABLE app_feature_ref(feature_uri varchar(255));
+CREATE INDEX IF NOT EXISTS visit_lastvisit_index ON visit(last_visit);
+CREATE INDEX IF NOT EXISTS visit_visitorid_index ON visit(visitor_id);
+INSERT INTO app_feature_ref(feature_uri) VALUES('/profdec/create');
+INSERT INTO app_feature_ref(feature_uri) VALUES('/profdec/read');
+INSERT INTO app_feature_ref(feature_uri) VALUES('/profdec/update');
+INSERT INTO app_feature_ref(feature_uri) VALUES('/profdec/delete');
+COMMIT;
