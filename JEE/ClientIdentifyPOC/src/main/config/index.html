@@ -1,0 +1,21 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Test page</title>
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <script src="https://www.java.com/js/deployJava.js"></script>
+    <script> 
+        var attributes = {
+            code:'com.googlecode.righettod.cip.EntryPointApplet',  width:1, height:1} ; 
+        var parameters = {jnlp_href: 'applet.jnlp'} ; 
+        deployJava.runApplet(attributes, parameters, '1.7'); 
+    </script>
+</body>
+</html>

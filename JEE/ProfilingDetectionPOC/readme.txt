@@ -5,7 +5,7 @@
 ** Description
 
 This project contains some examples of implementation for the concepts described into the 
-article "Web application: Phishing attackers" for HAKIN9 magazine.
+article "Web application: Phishing attackers" for HAKIN9 magazine. (file "TheFishingAttackers.docx")
 
 ** Prerequisite
 

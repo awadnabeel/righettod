@@ -1,0 +1,24 @@
+<? xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE jnlp PUBLIC "-//Sun Microsystems, Inc//DTD JNLP Descriptor 6.10//EN" "http://java.sun.com/dtd/JNLP-6.10.dtd">
+<jnlp href="applet.jnlp" spec="6.0">
+	<information>
+		<title>ClientIdentityPOC</title>
+		<vendor>RIGHETTOD</vendor>
+		<homepage href="http://www.righettod.eu" />
+		<description>POC of a applet grabbing information from local PC and sending them to an endpoint in order to identify client</description>
+	</information>
+  <security>
+      <all-permissions/>
+  </security>	
+	<resources>
+		<j2se version="1.7+" href="http://java.sun.com/products/autodl/j2se" />
+		<jar href="clientidentifypoc.jar" main="true" />
+	</resources>
+	<applet-desc
+		id="cip"
+		name="cip"
+		main-class="com.googlecode.righettod.cip.EntryPointApplet"
+		width="1"
+		height="1"
+		/>
+</jnlp>
