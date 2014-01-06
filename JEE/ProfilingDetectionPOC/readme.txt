@@ -5,7 +5,7 @@
 ** Description
 
 This project contains some examples of implementation for the concepts described into the 
-article "Web application: Phishing attackers" for HAKIN9 magazine. (file "TheFishingAttackers.docx")
+OWASP wiki article "https://www.owasp.org/index.php/Detect_profiling_phase_into_web_application" (file "TheFishingAttackers.docx").
 
 ** Prerequisite
 
