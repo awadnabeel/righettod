@@ -166,7 +166,7 @@ for($i = 1 ; $i <= 7 ; $i++ ){
 			echo("<strong>$clabel ($realTime)</strong><br />");
 			echo("Level: $clevel<br />");
 			echo("Studio: $cstudio<br />");
-			echo("Prof.: $cinstructor");
+			//echo("Prof.: $cinstructor");
 
 			$j++;
 			$previousCTime = $ctime;
