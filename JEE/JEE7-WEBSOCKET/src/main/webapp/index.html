@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebSocket client</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script>
+            var wsktClient = new WebSocket("ws://localhost:8080/jee7-websocket/hash");
+
+            wsktClient.onmessage = function(msg) {
+                displayResponse("onMessage:");
+                displayResponse(msg.data);
+            };
+
+            wsktClient.onerror = function(data) {
+                displayResponse("onError:");
+                displayResponse(data);
+            };
+
+            wsktClient.onopen = function() {
+                displayResponse("Connection opened");
+            };
+
+            wsktClient.onclosed = function() {
+                displayResponse("Connection closed");
+            };
+
+            function sendGoodRequest() {
+                var algo = document.getElementById("algo").value;
+                var msg = document.getElementById("message").value;
+                var req = "{'algorithm':'" + algo + "','originalData':'" + msg + "'}";
+                wsktClient.send(req);
+            }
+
+            function sendBadRequest() {
+                var algo = document.getElementById("algo").value;
+                var msg = document.getElementById("message").value;
+                var req = "{'algorithm':'" + algo + "','originalData':'" + msg + "'}}}}";
+                wsktClient.send(req);
+            }
+
+            function displayResponse(data) {
+                var container = document.getElementById("container");
+                container.innerHTML += data + "<br>";
+            }
+        </script>
+    </head>
+    <body>
+        <b>Digest algorithm:</b>
+        <br/>
+        <input type="text" id="algo"  style="width: 20%;" value="md5"/>       
+        <br/>
+        <b>Data:</b>
+        <br/>
+        <input type="text" id="message" style="width: 20%;"/> 
+        <br />
+        <button type="button" id="sendReqOK" onclick="sendGoodRequest()">Send well formatted request</button>
+        &nbsp;&nbsp;&nbsp;
+        <button type="button" id="sendReqKO" onclick="sendBadRequest()">Send not well formatted request</button>        
+        <br /><br />
+        <b>Responses:</b>
+        <br />
+        <div id="container" style="width:100%; height: 100%;"></div>        
+    </body>
+</html>
