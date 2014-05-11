@@ -22,6 +22,11 @@ public class HashExchange {
      */
     private String hashedData = null;
 
+    /**
+     * Flag to indicate if the handler was secured
+     */
+    private boolean fromSecuredHandler = false;
+
     public String getAlgorithm() {
         return algorithm;
     }
@@ -44,6 +49,14 @@ public class HashExchange {
 
     public void setHashedData(String hashedData) {
         this.hashedData = hashedData;
+    }
+
+    public boolean isFromSecuredHandler() {
+        return fromSecuredHandler;
+    }
+
+    public void setFromSecuredHandler(boolean fromSecuredHandler) {
+        this.fromSecuredHandler = fromSecuredHandler;
     }
 
 }

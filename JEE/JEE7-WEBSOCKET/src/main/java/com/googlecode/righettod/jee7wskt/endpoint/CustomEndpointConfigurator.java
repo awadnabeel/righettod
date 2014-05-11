@@ -34,6 +34,13 @@ public class CustomEndpointConfigurator extends ServerEndpointConfig.Configurato
         for (String header : response.getHeaders().keySet()) {
             System.out.printf("<<<< Handshake response header '%s' => %s%n", header, response.getHeaders().get(header));
         }
+        //Get user roles here because we do not have access to them from endpoint
+        if (request.getUserPrincipal() != null) {
+            conf.getUserProperties().put("HAS_TC_ROLE", request.isUserInRole("tomcat_role"));
+            System.out.printf(">>>> Handshake from %s user with role 'tomcat_role' (%s)%n", request.getUserPrincipal().getName(), conf.getUserProperties().get("HAS_TC_ROLE"));
+        } else {
+            System.out.println(">>>> Handshake from anonymous user");
+        }
     }
 
     /**

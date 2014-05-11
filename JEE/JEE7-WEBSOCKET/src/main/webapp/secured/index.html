@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>WebSocket client - not secured example</title>
+        <title>WebSocket client - secured example</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script>
-            var wsktClient = new WebSocket("ws://localhost:8084/JEE7-WEBSOCKET/hash");
+            var wsktClient = new WebSocket("ws://localhost:8084/JEE7-WEBSOCKET/secured/hash");
 
             wsktClient.onmessage = function(msg) {
                 displayResponse("onMessage:");
